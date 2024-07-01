@@ -1,7 +1,10 @@
+name: Java CI with Maven
+
 on:
   push:
     branches:
       - "main"
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,18 +20,27 @@ jobs:
         cache: 'maven'
 
     - name: Install dependencies
-      run: sudo apt-get update && sudo apt-get install -y \
-        wget \
-        unzip \
-        xvfb \
-        libxi6 \
-        libgconf-2-4 \
-        default-jdk \
-        google-chrome-stable
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          wget \
+          unzip \
+          xvfb \
+          libxi6 \
+          libgconf-2-4 \
+          openjdk-11-jdk
+
+    - name: Set up Google Chrome
+      run: |
+        wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+        sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+        sudo apt-get update
+        sudo apt-get install -y google-chrome-stable
 
     - name: Set up ChromeDriver
       run: |
-        wget -N https://chromedriver.storage.googleapis.com/91.0.4472.101/chromedriver_linux64.zip
+        CHROME_VERSION=$(google-chrome-stable --version | grep -oP '\d+\.\d+\.\d+')
+        wget -N https://chromedriver.storage.googleapis.com/$CHROME_VERSION/chromedriver_linux64.zip
         unzip chromedriver_linux64.zip
         sudo mv -f chromedriver /usr/local/share/chromedriver
         sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
