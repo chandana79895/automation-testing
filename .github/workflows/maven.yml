@@ -40,4 +40,6 @@ jobs:
         export DISPLAY=:99
 
     - name: Run tests
-      run: mvn clean install
+      run: |
+        set -euo pipefail
+        mvn clean install
