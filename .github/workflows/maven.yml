@@ -45,4 +45,4 @@ jobs:
     - name: Run tests
       run: |
         set -euo pipefail
-        mvn clean install
+        mvn clean install -Dbrowser=chrome
