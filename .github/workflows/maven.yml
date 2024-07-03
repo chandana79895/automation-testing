@@ -30,17 +30,22 @@ jobs:
           libgconf-2-4 \
           openjdk-11-jdk
 
-    # - name: Set up Google Chrome
-    #   run: |
-    #     wget -N https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
-    #     unzip chromedriver_linux64.zip
-    #     sudo mv -f chromedriver /usr/local/share/chromedriver
-    #     sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
+    - name: Set up Google Chrome and ChromeDriver
+      run: |
+        # Install specific version of Google Chrome
+        wget https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_114.0.5735.90-1_amd64.deb
+        sudo apt-get install -y ./google-chrome-stable_114.0.5735.90-1_amd64.deb
 
-    # - name: Run xvfb
-    #   run: |
-    #     Xvfb :99 -ac &
-    #     export DISPLAY=:99
+        # Set up ChromeDriver
+        wget -N https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
+        unzip chromedriver_linux64.zip
+        sudo mv -f chromedriver /usr/local/share/chromedriver
+        sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
+
+    - name: Run xvfb
+      run: |
+        Xvfb :99 -ac &
+        export DISPLAY=:99
 
     - name: Run tests
       run: |
