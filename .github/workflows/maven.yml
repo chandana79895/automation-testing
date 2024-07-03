@@ -32,6 +32,9 @@ jobs:
 
     - name: Set up Google Chrome and ChromeDriver
       run: |
+        # Install specific version of Google Chrome
+        wget https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_114.0.5735.90-1_amd64.deb
+        sudo apt-get install -y ./google-chrome-stable_114.0.5735.90-1_amd64.deb
 
         # Set up ChromeDriver
         wget -N https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
