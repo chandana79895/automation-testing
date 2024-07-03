@@ -37,7 +37,11 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y google-chrome-stable
         sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/google-chrome-stable 200
-        sudo update-alternatives --install /usr/bin/gnome-www-browser gnome-www-browser /usr/bin/google-chrome-stable 200
+        wget -N https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
+        unzip chromedriver_linux64.zip
+        sudo mv -f chromedriver /usr/local/share/chromedriver
+        sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
+        sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
 
     - name: Run xvfb
       run: |

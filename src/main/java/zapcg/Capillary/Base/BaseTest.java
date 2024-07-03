@@ -34,7 +34,7 @@ public class BaseTest {
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--remote-allow-origins=*");
                 options.addArguments("--headless");
-                options.addArguments("--no-sandbox");
+                // options.addArguments("--no-sandbox");
                 options.addArguments("--disable-dev-shm-usage");
                 options.addArguments("--disable-gpu");
                 driver = new ChromeDriver(options);
