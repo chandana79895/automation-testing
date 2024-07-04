@@ -30,7 +30,7 @@ public class BaseTest {
     public void initialization(String browser) {
     try {
         if (browser.equalsIgnoreCase("chrome")) {
-            WebDriverManager.chromedriver().driverVersion("114.0.5735.90").setup();
+            WebDriverManager.chromedriver().driverVersion("126.0.6478.57").setup();
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--remote-allow-origins=*");
             options.addArguments("--headless");
