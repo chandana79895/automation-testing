@@ -21,14 +21,16 @@ jobs:
 
     - name: Download ChromeDriver
       run: |
-        Invoke-WebRequest -Uri "https://chromedriver.storage.googleapis.com/126.0.6478.127/chromedriver_win32.zip" -OutFile "chromedriver_win32.zip"
-        Expand-Archive chromedriver_win32.zip -DestinationPath .
-        Remove-Item -Force chromedriver_win32.zip
-        $env:PATH += ";$(pwd)"
+        # Specific version of ChromeDriver
+        $chromeVersion = "126.0.6478.126"
+        Invoke-WebRequest -Uri "https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/$chromeVersion/win64/chromedriver-win64.zip" -OutFile "chromedriver_win64.zip"
+        Expand-Archive chromedriver_win64.zip -DestinationPath .
+        Remove-Item -Force chromedriver_win64.zip
+        $env:PATH += ";$(pwd)\chromedriver-win64"
 
     - name: Verify ChromeDriver installation
       run: |
-        .\chromedriver.exe --version
+        .\chromedriver-win64\chromedriver.exe --version
 
     - name: Build with Maven
       run: mvn clean install
