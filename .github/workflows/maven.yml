@@ -21,7 +21,7 @@ jobs:
 
     - name: Download ChromeDriver
       run: |
-        $chromeVersion = Invoke-RestMethod -Uri https://chromedriver.storage.googleapis.com/126.0.6478.126
+        $chromeVersion = Invoke-RestMethod -Uri https://chromedriver.storage.googleapis.com/LATEST_RELEASE
         Invoke-WebRequest -Uri "https://chromedriver.storage.googleapis.com/$chromeVersion/chromedriver_win32.zip" -OutFile "chromedriver_win32.zip"
         Expand-Archive chromedriver_win32.zip -DestinationPath .
         Remove-Item -Force chromedriver_win32.zip
