@@ -27,11 +27,9 @@ jobs:
       run: |
         choco install chromedriver --ignore-checksums
 
-    - name: Display Chrome version
-      run: google-chrome --version
-
-    - name: Display Chromedriver version
-      run: chromedriver --version
+    - name: Verify Chromedriver installation
+      run: |
+        chromedriver --version
 
     - name: Build with Maven
       run: mvn clean install
