@@ -19,18 +19,19 @@ jobs:
         distribution: 'adopt'
         cache: 'maven'
 
-    - name: Download ChromeDriver
+    - name: Install Chrome
       run: |
-        # Specific version of ChromeDriver
-        $chromeVersion = "126.0.6478.126"
-        Invoke-WebRequest -Uri "https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/$chromeVersion/win64/chromedriver-win64.zip" -OutFile "chromedriver_win64.zip"
-        Expand-Archive chromedriver_win64.zip -DestinationPath .
-        Remove-Item -Force chromedriver_win64.zip
-        $env:PATH += ";$(pwd)\chromedriver-win64"
+        choco install googlechrome --ignore-checksums
 
-    - name: Verify ChromeDriver installation
+    - name: Install Chromedriver
       run: |
-        .\chromedriver-win64\chromedriver.exe --version
+        choco install chromedriver --ignore-checksums
+
+    - name: Display Chrome version
+      run: google-chrome --version
+
+    - name: Display Chromedriver version
+      run: chromedriver --version
 
     - name: Build with Maven
       run: mvn clean install
