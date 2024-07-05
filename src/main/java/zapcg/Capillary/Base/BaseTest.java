@@ -66,7 +66,7 @@ public class BaseTest {
     public void initialization(String browser) {
         try {
             if (browser.equalsIgnoreCase("chrome")) {
-                System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+                System.setProperty("webdriver.chrome.driver", "C:\\ProgramData\\chocolatey\\lib\\chromedriver\\tools\\chromedriver.exe");
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--remote-allow-origins=*");
                 options.setExperimentalOption("detach", true);
