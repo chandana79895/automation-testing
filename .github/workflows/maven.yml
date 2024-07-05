@@ -31,9 +31,5 @@ jobs:
       shell: powershell
       run: Start-Process "C:\Program Files\Google\Chrome\Application\chrome.exe" -ArgumentList "--headless", "--remote-debugging-port=9222"
 
-    - name: Verify Chromedriver installation
-      run: |
-        C:\ProgramData\chocolatey\lib\chromedriver\tools\chromedriver.exe --version
-
     - name: Build with Maven
       run: mvn clean install
