@@ -1,67 +1,107 @@
 package zapcg.Capillary.Base;
-
+ 
 import java.time.Duration;
-
+import java.util.logging.LogManager;
+import org.testng.ITestResult;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
-
-import io.github.bonigarcia.wdm.WebDriverManager;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 import zapcg.Cappilary.utils.ConfigReader;
 import zapcg.Cappilary.utils.DeviceData;
-
+ 
+import org.apache.logging.log4j.Logger;
+ 
+ 
 public class BaseTest {
-    private static final int TIMEOUT = 30;
-    private static WebDriver driver;
-
-    public static void main(String[] args) {
+	public static WebDriver driver;
+    protected String baseUrl;
+    protected Dimension dimension;
+    protected String deviceName; 
+    private static final Logger logger=org.apache.logging.log4j.LogManager.getLogger(BaseTest.class.getName());
+    //private static final Logger logger1 = LogManager.LogManager.getLogger(BaseTest.class.getName());
+ 
+    
+    @BeforeSuite
+    public void beforeSuite() {
+        logger.info("Starting Test Suite");
+    }
+ 
+    @AfterSuite
+    public void afterSuite() {
+        logger.info("Test Suite Completed");
+    }
+ 
+    @BeforeClass
+    @Parameters({"browser", "deviceName"})
+    public void beforeClass(String browser, String deviceName) {
+        logger.info("Starting Test Class");
+        setUp(browser, deviceName);
+        initialization(browser);
+    }
+    @AfterClass
+    public void afterClass() {
+        logger.info("Test Class Completed");
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+    @BeforeMethod
+ 
+    public void setUp(String browser, String deviceName) {
+        ConfigReader configReader = new ConfigReader();
+        baseUrl = configReader.getProperty("url");
+        dimension = DeviceData.getDimension(deviceName);
+        this.deviceName = deviceName;
+    }
+ 
+    public void initialization(String browser) {
         try {
-            String browser = "chrome"; // Change this as needed
             if (browser.equalsIgnoreCase("chrome")) {
-                System.setProperty("webdriver.chrome.driver", "C:\\ProgramData\\chocolatey\\lib\\chromedriver\\tools\\chromedriver.exe");
+                System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
                 ChromeOptions options = new ChromeOptions();
-                options.addArguments("--headless");
+                options.addArguments("--remote-allow-origins=*");
+                options.setExperimentalOption("detach", true);
                 driver = new ChromeDriver(options);
             } else if (browser.equalsIgnoreCase("firefox")) {
-                WebDriverManager.firefoxdriver().setup();
+                System.setProperty("webdriver.gecko.driver", "path/to/geckodriver");
                 driver = new FirefoxDriver();
             }
-
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(TIMEOUT));
+ 
+            if (dimension != null) {
+                driver.manage().window().setSize(dimension);
+            }
             driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
-
-            // Open the desired URL
-            driver.get("https://d1msv2sqknn4w4.cloudfront.net/");
-
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         } catch (Exception e) {
-            System.err.println("Error initializing WebDriver: " + e.getMessage());
-        } finally {
+            logger.error("Error initializing WebDriver: ", e);
             if (driver != null) {
                 driver.quit();
             }
         }
     }
-
+ 
     @AfterMethod
-    public void tearDown() {
-        try {
-            if (driver != null) {
-                String browserName = driver.getClass().getSimpleName();
-                System.out.println("Test execution completed on " + browserName + " with device: " + deviceName);
-            }
-        } catch (Exception e) {
-            System.err.println("Error during tearDown: " + e.getMessage());
-        } finally {
-            if (driver != null) {
-                try {
-                    driver.quit();
-                } catch (Exception e) {
-                    System.err.println("Error closing WebDriver session: " + e.getMessage());
-                }
-            }
+    public void tearDown(ITestResult result) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            logger.error("Test Failed: " + result.getName());
+            logger.error("Error: ", result.getThrowable());
+        } else if (result.getStatus() == ITestResult.SUCCESS) {
+            logger.info("Test Passed: " + result.getName());
         }
     }
+
+ 
+    
+
+ 
+ 
 }
