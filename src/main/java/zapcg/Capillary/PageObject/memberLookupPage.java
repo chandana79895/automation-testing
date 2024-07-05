@@ -61,6 +61,9 @@ public class memberLookupPage extends BaseTest {
 	 @FindBy(xpath="//div[@id='LSCONT']")
 	 WebElement navigatedFromMemberLookupToLocation;
 	 
+	 @FindBy(xpath="//div[@id='MSCONT']")
+	 WebElement navigatedFromMemberLookupToMemeberLookup;
+	 
 	 @FindBy(xpath="//div[@id='LSCONT']")
 	 WebElement naviagtedToLoginPage;
 	
@@ -306,7 +309,7 @@ public class memberLookupPage extends BaseTest {
 		        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
 		        // Wait for the URL to change to the expected URL
-		        WebElement pageLoaded = wait.until(ExpectedConditions.visibilityOf(navigatedFromMemberLookupToLocation));
+		        WebElement pageLoaded = wait.until(ExpectedConditions.visibilityOf(navigatedFromMemberLookupToMemeberLookup));
 
 		        if (pageLoaded != null && pageLoaded.isDisplayed()) {
 		        	// Page is successfully loaded if the WebElement is visible
