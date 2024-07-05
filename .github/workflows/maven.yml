@@ -26,5 +26,4 @@ jobs:
         run: google-chrome --version
 
       - name: Build with Maven
-        working-directory: automation-testing
         run: mvn clean test 
