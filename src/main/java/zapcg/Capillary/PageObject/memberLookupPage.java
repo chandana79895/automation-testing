@@ -32,10 +32,10 @@ public class memberLookupPage extends BaseTest {
 	@FindBy(xpath="//button[@id='MS018B']")
 	WebElement searchButton;
 	
-	@FindBy(xpath="//p[contains(text(),'No User or Customer found')]")
+	@FindBy(xpath="//p[contains(text(),'The Member/Card Number was not found.')]")
 	WebElement errormsgforinvalidmemberId;
 	
-	@FindBy(xpath="")
+	@FindBy(xpath="//p[contains(text(),'The Member/Card Number was not found.')]")
 	WebElement errormsgformaxlengthmemberid;
 	
 	
@@ -55,7 +55,14 @@ public class memberLookupPage extends BaseTest {
 	 @FindBy(xpath="//ul/li/div[@id='MENMODHI3']")
 		WebElement logoutLocationScreen;
 	    
-
+	 @FindBy(xpath="//div[@id='MDCONT']")
+	 WebElement navigatedFromMemberLookupToMemberDetails;
+	 
+	 @FindBy(xpath="//div[@id='LSCONT']")
+	 WebElement navigatedFromMemberLookupToLocation;
+	 
+	 @FindBy(xpath="//div[@id='LSCONT']")
+	 WebElement naviagtedToLoginPage;
 	
 	
 	
@@ -123,32 +130,28 @@ public class memberLookupPage extends BaseTest {
 			}
 			
 		}
+	
 	    
-	    
-	    public void headerHyperlinkVerification(WebDriver driver, String expectedUrl) {
+	    public void headerHyperlinkVerification(WebDriver driver) {
 	    	
 	    	try {
 				// Create an instance of WebDriverWait with a timeout of 10 seconds
 		        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
 		        // Wait for the URL to change to the expected URL
-		        boolean isUrlChanged = wait.until(ExpectedConditions.urlToBe("https://d1msv2sqknn4w4.cloudfront.net/location-search"));
+		        WebElement pageLoaded = wait.until(ExpectedConditions.visibilityOf(navigatedFromMemberLookupToLocation));
 
-		        if (isUrlChanged) {
-		            String currentUrl = driver.getCurrentUrl();
-		            System.out.println("After clicking on Header-Hyperlink, Navigated to Location screen: " + currentUrl);
-		            String expectedUrl1 = "https://d1msv2sqknn4w4.cloudfront.net/location-search";
-		            Assert.assertEquals(currentUrl, expectedUrl1, "The URL incorrect for location screen");
+		        if (pageLoaded != null && pageLoaded.isDisplayed()) {
+		        	// Page is successfully loaded if the WebElement is visible
+		            System.out.println("Successfully navigated to the Location screen");
 		        } else {
-		            System.out.println("The URL did not change to the expected URL within the timeout period.i.e, no success navigation");
-		            Assert.fail("Navigation was not successful as the URL did not change to the expected URL.");
+		            System.out.println("The expected element did not become visible within the timeout period");
+		            Assert.fail("Navigation from member lookup screen to Location screen was not successful as the expected element did not become visible.");
 		        }
 		    } catch (Exception e) {
-		        System.out.println("An error occurred during navigation to location page: " + e.getMessage());
-		        Assert.fail("An error occurred during navigation to location page: " + e.getMessage());
-		    
-			}
-	    	
+		        System.out.println("An error occurred during navigation: " + e.getMessage());
+		        Assert.fail("An error occurred during navigation verification: " + e.getMessage());
+		    }
 	    	
 	    	
 	    }
@@ -297,78 +300,69 @@ public class memberLookupPage extends BaseTest {
 	    	
 	    }
 
-	    public void verifySuccessfullNavigationFromMemberLookupToMemberLookupScreen(WebDriver driver, String expectedUrl) {
-			try {
+	    public void verifySuccessfullNavigationFromMemberLookupToMemberLookupScreen(WebDriver driver) {
+	    	try {
 				// Create an instance of WebDriverWait with a timeout of 10 seconds
 		        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
 		        // Wait for the URL to change to the expected URL
-		        boolean isUrlChanged = wait.until(ExpectedConditions.urlToBe("https://d1msv2sqknn4w4.cloudfront.net/member-search"));
+		        WebElement pageLoaded = wait.until(ExpectedConditions.visibilityOf(navigatedFromMemberLookupToLocation));
 
-		        if (isUrlChanged) {
-		            String currentUrl = driver.getCurrentUrl();
-		            System.out.println("Using hamburgurIcon, choose Member lookup option,and successfully navigated to the Member Lookup screen: " + currentUrl);
-		            String expectedUrl1 = "https://d1msv2sqknn4w4.cloudfront.net/member-search";
-		            Assert.assertEquals(currentUrl, expectedUrl1, "The URL of member lookup screen is incorrect. Navigation not successful.");
+		        if (pageLoaded != null && pageLoaded.isDisplayed()) {
+		        	// Page is successfully loaded if the WebElement is visible
+		            System.out.println("Successfully navigated to the member lookup screen");
 		        } else {
-		            System.out.println("The URL did not change to the expected URL within the timeout period.i.e, no success navigation from location to member lookup screen,");
-		            Assert.fail("Navigation was not successful as the URL did not change to the expected URL.");
+		            System.out.println("The expected element did not become visible within the timeout period");
+		            Assert.fail("Navigation from member lookup screen to Member lookup screen was not successful as the expected element did not become visible.");
 		        }
 		    } catch (Exception e) {
-		        System.out.println("An error occurred during login verification: " + e.getMessage());
-		        Assert.fail("An error occurred during page verification: " + e.getMessage());
-		    
-			}
+		        System.out.println("An error occurred during navigation: " + e.getMessage());
+		        Assert.fail("An error occurred during navigation verification: " + e.getMessage());
+		    }
 			
 		}
 	    
-	    public void verifySuccessfullNavigationFromMemberLookupToLocationScreen(WebDriver driver, String expectedUrl) {
-			try {
+	    public void verifySuccessfullNavigationFromMemberLookupToLocationScreen(WebDriver driver) {
+	    	try {
 				// Create an instance of WebDriverWait with a timeout of 10 seconds
 		        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
 		        // Wait for the URL to change to the expected URL
-		        boolean isUrlChanged = wait.until(ExpectedConditions.urlToBe("https://d1msv2sqknn4w4.cloudfront.net/location-search"));
+		        WebElement pageLoaded = wait.until(ExpectedConditions.visibilityOf(navigatedFromMemberLookupToLocation));
 
-		        if (isUrlChanged) {
-		            String currentUrl = driver.getCurrentUrl();
-		            System.out.println("Using hamburgurIcon, choose Location option,and successfully navigated to the Location screen: " + currentUrl);
-		            String expectedUrl1 = "https://d1msv2sqknn4w4.cloudfront.net/location-search";
-		            Assert.assertEquals(currentUrl, expectedUrl1, "The URL of location screen is incorrect. Navigation not successful.");
+		        if (pageLoaded != null && pageLoaded.isDisplayed()) {
+		        	// Page is successfully loaded if the WebElement is visible
+		            System.out.println("Successfully navigated to the Location screen");
 		        } else {
-		            System.out.println("The URL did not change to the expected URL within the timeout period.i.e, no success navigation from location to member lookup screen,");
-		            Assert.fail("Navigation was not successful as the URL did not change to the expected URL.");
+		            System.out.println("The expected element did not become visible within the timeout period");
+		            Assert.fail("Navigation from member lookup screen to Earn location screen was not successful as the expected element did not become visible.");
 		        }
 		    } catch (Exception e) {
-		        System.out.println("An error occurred during login verification: " + e.getMessage());
-		        Assert.fail("An error occurred during page verification: " + e.getMessage());
-		    
-			}
+		        System.out.println("An error occurred during navigation: " + e.getMessage());
+		        Assert.fail("An error occurred during navigation verification: " + e.getMessage());
+		    }
 	    }
 			
-				public void verifyLogoutOptionOnMemberLookupScreen(WebDriver driver, String expectedUrl) {
+				public void verifyLogoutOptionOnMemberLookupScreen(WebDriver driver) {
 		    	
-		    	try {
-					// Create an instance of WebDriverWait with a timeout of 10 seconds
-			        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+					try {
+						// Create an instance of WebDriverWait with a timeout of 10 seconds
+				        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
-			        // Wait for the URL to change to the expected URL
-			        boolean isUrlChanged = wait.until(ExpectedConditions.urlToBe("https://d1msv2sqknn4w4.cloudfront.net/login"));
+				        // Wait for the URL to change to the expected URL
+				        WebElement pageLoaded = wait.until(ExpectedConditions.visibilityOf(naviagtedToLoginPage));
 
-			        if (isUrlChanged) {
-			            String currentUrl = driver.getCurrentUrl();
-			            System.out.println("Using hamburgurIcon, choose Logout,and successfully navigated to the Login screen: " + currentUrl);
-			            String expectedUrl1 = "https://d1msv2sqknn4w4.cloudfront.net/login";
-			            Assert.assertEquals(currentUrl, expectedUrl1, "The URL of login screen is incorrect. Navigation not successful.");
-			        } else {
-			            System.out.println("The URL did not change to the expected URL within the timeout period.i.e, no success navigation from location to member lookup screen,");
-			            Assert.fail("Navigation was not successful as the URL did not change to the expected URL.");
-			        }
-			    } catch (Exception e) {
-			        System.out.println("An error occurred during login verification: " + e.getMessage());
-			        Assert.fail("An error occurred during page verification: " + e.getMessage());
-			    
-				}
+				        if (pageLoaded != null && pageLoaded.isDisplayed()) {
+				        	// Page is successfully loaded if the WebElement is visible
+				            System.out.println("Successfully navigated to the Login screen");
+				        } else {
+				            System.out.println("The expected element did not become visible within the timeout period");
+				            Assert.fail("Navigation from member lookup screen to Login screen was not successful as the expected element did not become visible.");
+				        }
+				    } catch (Exception e) {
+				        System.out.println("An error occurred during navigation: " + e.getMessage());
+				        Assert.fail("An error occurred during navigation verification: " + e.getMessage());
+				    }
 				
 		    	
 		    	
@@ -379,6 +373,28 @@ public class memberLookupPage extends BaseTest {
 					logoutLocationScreen.click();
 				}
 			
+				public void verifySuccessfullNavigationFromMemberDetailsToEarnPointsPage(WebDriver driver) {
+					try {
+						// Create an instance of WebDriverWait with a timeout of 10 seconds
+				        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+				        // Wait for the URL to change to the expected URL
+				        WebElement pageLoaded = wait.until(ExpectedConditions.visibilityOf(navigatedFromMemberLookupToMemberDetails));
+
+				        if (pageLoaded != null && pageLoaded.isDisplayed()) {
+				        	// Page is successfully loaded if the WebElement is visible
+				            System.out.println("Successfully navigated to the Member details from member lookup screen");
+				        } else {
+				            System.out.println("The expected element did not become visible within the timeout period");
+				            Assert.fail("Navigation from member lookup screen to member details screen was not successful as the expected element did not become visible.");
+				        }
+				    } catch (Exception e) {
+				        System.out.println("An error occurred during navigation: " + e.getMessage());
+				        Assert.fail("An error occurred during navigation verification: " + e.getMessage());
+				    }
+					
+				}
+				
 			
 			
 		}

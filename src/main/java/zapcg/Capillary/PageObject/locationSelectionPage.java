@@ -64,6 +64,9 @@ public class locationSelectionPage {
 	    @FindBy(xpath="//ul/li/div[@id='MENMODHI3']")
 		WebElement logoutLocationScreen;
 	    
+	    @FindBy(xpath="//div[@id='MSCONT']")
+	    WebElement navigatedToMemberLookupScreen;
+	    
 		//Initializing the Page Objects:
 		public locationSelectionPage(WebDriver driver){
 			this.driver=driver;
@@ -328,6 +331,28 @@ public class locationSelectionPage {
 		        	chooseLocationBtn.click();
 		        }
 		    }
+		    
+		    public void verifySuccessfullNavigationFromLocationTOMemberLookupPage(WebDriver driver) {
+				try {
+					// Create an instance of WebDriverWait with a timeout of 10 seconds
+			        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+			        // Wait for the URL to change to the expected URL
+			        WebElement pageLoaded = wait.until(ExpectedConditions.visibilityOf(navigatedToMemberLookupScreen));
+
+			        if (pageLoaded != null && pageLoaded.isDisplayed()) {
+			        	// Page is successfully loaded if the WebElement is visible
+			            System.out.println("Successfully navigated to the MemberLookup screen");
+			        } else {
+			            System.out.println("The expected element did not become visible within the timeout period");
+			            Assert.fail("Navigation from location to member lookup screen was not successful as the expected element did not become visible.");
+			        }
+			    } catch (Exception e) {
+			        System.out.println("An error occurred during navigation: " + e.getMessage());
+			        Assert.fail("An error occurred during navigation verification: " + e.getMessage());
+			    }
+				
+			}
 			
 			
 

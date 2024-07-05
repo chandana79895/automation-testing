@@ -9,14 +9,21 @@
     <parameter name="browser" value="chrome"/>
     <parameter name="deviceName" value="Tablet Landscape"/>
     <classes>
-      <class name="zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases">
+      <class name="zapcg.Capillary.LocationPageTestCases.Location_ExistingUser_TestCases">
         <methods>
-          <include name="testInvalidUsername_TestCase2"/>
-          <include name="tearDown"/>
           <include name="initialize"/>
-          <include name="testInvalidPassword_TestCase3"/>
+          <include name="chooseValidLocationForNewUser"/>
+          <include name="verifyIfAbleToSelectOptionFromDropDown"/>
+          <include name="verifyHeaderOfMemberLookupScreen"/>
+          <include name="navigatedFromLocationToLookupScreen"/>
+          <include name="burgerIconMemberLocationNavigation"/>
+          <include name="tearDown"/>
+          <include name="verifyDropDownAvailability"/>
+          <include name="burgerIconMemberLookupNavigation"/>
+          <include name="burgerIconLogout"/>
+          <include name="verifyChooseLocationButtonAvailability"/>
         </methods>
-      </class> <!-- zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases -->
+      </class> <!-- zapcg.Capillary.LocationPageTestCases.Location_ExistingUser_TestCases -->
     </classes>
   </test> <!-- LoginTestsChromeBrowserTabletLandscape(failed) -->
 </suite> <!-- Failed suite [TestSuite] -->

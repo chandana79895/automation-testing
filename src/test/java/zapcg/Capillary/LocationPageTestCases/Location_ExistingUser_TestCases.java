@@ -25,10 +25,9 @@ public class Location_ExistingUser_TestCases extends BaseTest{
 				setUp(browser, deviceName); // Use the setup method to initialize the browser
 		       initialization(browser);
 		       driver.get(baseUrl);
-		       Thread.sleep(1000); // For demonstration purposes, avoid using Thread.sleep in real tests
+		       Thread.sleep(1000); 
 		       lp = new loginPage(driver);
-		       lp = new loginPage(driver);
-		       mlp=new memberLookupPage(driver);
+		      mlp=new memberLookupPage(driver);
 		       lp.changeDefaultLanguage();
 		       lp.chooseEnglishLanguage();
                lp.login("zapcom_test2", "storeportal");
@@ -53,7 +52,8 @@ public class Location_ExistingUser_TestCases extends BaseTest{
                     locp.clickOnChooseLocationButton();
             
                    // locp.clickNavigateButton();
-                    locp.verifySuccessfullNavigationFromLocationToMemberSearchPage(driver, "https://d1msv2sqknn4w4.cloudfront.net/member-search");
+                    locp.verifySuccessfullNavigationFromLocationTOMemberLookupPage(driver);
+                    //locp.verifySuccessfullNavigationFromLocationToMemberSearchPage(driver, "https://d1msv2sqknn4w4.cloudfront.net/member-search");
                     System.out.println("The functionality of location screen working properly");
                     
             		}
@@ -124,7 +124,7 @@ public class Location_ExistingUser_TestCases extends BaseTest{
                         locp.selectStoreOptions(option2);
                      
                      // Somewhere else in your code where you call the method
-                        String selectedOption = locp.selectStoreOptions("HMH01101 - MyStays Akasaka");
+                        String selectedOption = locp.selectStoreOptions("HMH01101 - MyStays Akasaka2");
                         if (selectedOption != null) {
                             System.out.println("Selected option: " + selectedOption);
                         } else {
@@ -190,6 +190,27 @@ public class Location_ExistingUser_TestCases extends BaseTest{
             	System.out.println("Logout option under Hamburger icon on Location screen working fine");
             	
 			}
+			
+			@Test(priority = 19 )
+            public void navigatedFromLocationToLookupScreen() throws InterruptedException {
+            	
+            	locationSelectionPage locp = new locationSelectionPage(driver);
+
+            	
+                    // Select options from dropdowns
+                    String option1 = "Option 1";
+                    String option2 = "Option 2";
+                    
+                    locp.lookupPropertyOptions(option1);
+                    locp.selectStoreOptions(option2);
+                    locp.clickOnChooseLocationButton();
+                    locp.verifySuccessfullNavigationFromLocationTOMemberLookupPage(driver);
+            
+            	
+            	
+			}
+			
+			
 			
 		
 

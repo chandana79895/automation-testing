@@ -12,7 +12,7 @@
     <parameter name="deviceName" value="Tablet Landscape"/> <!-- Tablet Portrait -->
     <classes>
      
-       <class name="zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases"/>
+       <class name="zapcg.Capillary.LoginTestCases.Login_Valid_TestCases"/>
      
       
     </classes>

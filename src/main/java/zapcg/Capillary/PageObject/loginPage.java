@@ -6,6 +6,7 @@ import java.time.Duration;
 import java.util.NoSuchElementException;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -56,6 +57,12 @@ public class loginPage{
 	
 	@FindBy(xpath="//div/h6[@id='LSERRM' and contains(text(),\"Your account is locked. Ask your manager for unlock the account.\")]")//xpath for lockout message
 	WebElement lockoutmsg;
+	
+	@FindBy(xpath="//div[@id='LSCONT']")
+	WebElement locationPageFromLoginPage;
+	
+	@FindBy(xpath="//div[@id='MSCONT']")
+	WebElement memberLookupPageFromLoginPage;
 	
 	
 	//Initializing the Page Objects:
@@ -466,7 +473,31 @@ public class loginPage{
 			loginBtn.click();
 			}
 	
-	
-	
+		public void verifySuccessfullNavigationFromLogin(WebDriver driver) {
+			  try {
+			        // Create an instance of WebDriverWait with a timeout of 20 seconds
+			        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+			        // Wait for either locationPageFromLoginPage or memberLookupPageFromLoginPage to be visible
+			        boolean locationPageVisible = wait.until(ExpectedConditions.visibilityOf(locationPageFromLoginPage)).isDisplayed();
+			        boolean memberLookupPageVisible = wait.until(ExpectedConditions.visibilityOf(memberLookupPageFromLoginPage)).isDisplayed();
+
+			        // Determine which page is visible
+			        if (locationPageVisible) {
+			            System.out.println("Successfully navigated to the Location screen");
+			        } else if (memberLookupPageVisible) {
+			            System.out.println("Successfully navigated to the Member Lookup screen");
+			        } else {
+			            System.out.println("Neither locationPage nor memberLookupPage became visible within the timeout period");
+			            Assert.fail("Navigation from login screen was not successful as neither expected element became visible.");
+			        }
+			    } catch (TimeoutException e) {
+			        System.out.println("Timeout waiting for either page to become visible: " + e.getMessage());
+			        Assert.fail("Timeout waiting for either page to become visible: " + e.getMessage());
+			    } catch (Exception e) {
+			        System.out.println("An error occurred during login: " + e.getMessage());
+			        Assert.fail("An error occurred during login verification: " + e.getMessage());
+			    }
+		}
 
 }

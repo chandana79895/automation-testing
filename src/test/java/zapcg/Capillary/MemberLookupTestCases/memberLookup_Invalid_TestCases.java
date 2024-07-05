@@ -45,7 +45,7 @@ public class memberLookup_Invalid_TestCases extends BaseTest {
 			memberLookupPage mlp = new memberLookupPage(driver);
 			mlp.enterMemberId("GT0000898089");
 			mlp.clickOnSearchButton();
-			mlp.verifyValidationMessageForInvalidMemberId("No User or Customer found");
+			mlp.verifyValidationMessageForInvalidMemberId("The Member/Card Number was not found.");
 			
 			
 			}
@@ -55,7 +55,7 @@ public class memberLookup_Invalid_TestCases extends BaseTest {
 			memberLookupPage mlp = new memberLookupPage(driver);
 			mlp.enterMemberId("GT00000367323323211");
 			mlp.clickOnSearchButton();
-			mlp.verifyMaxLengthForMemberId("Length validation should display");
+			mlp.verifyMaxLengthForMemberId("The Member/Card Number was not found.");
 			
 			
 			}
@@ -66,7 +66,7 @@ public class memberLookup_Invalid_TestCases extends BaseTest {
 			memberLookupPage mlp = new memberLookupPage(driver);
 			mlp.enterMemberId("123456");
 			mlp.clickOnSearchButton();
-			mlp.verifyValidationMessageForInvalidMemberId("No User or Customer found");
+			mlp.verifyValidationMessageForInvalidMemberId("The Member/Card Number was not found.");
 			
 			
 			}
@@ -77,7 +77,7 @@ public class memberLookup_Invalid_TestCases extends BaseTest {
 			memberLookupPage mlp = new memberLookupPage(driver);
 			mlp.enterMemberId("123456789098");
 			mlp.clickOnSearchButton();
-			mlp.verifyMaxLengthForMemberId("Length validation should display");
+			mlp.verifyMaxLengthForMemberId("The Member/Card Number was not found.");
 			
 			
 			}
@@ -92,6 +92,8 @@ public class memberLookup_Invalid_TestCases extends BaseTest {
 			
 			
 			}
+		
+	
 	
 	
 	
