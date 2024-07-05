@@ -27,17 +27,12 @@ public class BaseTest {
         this.deviceName = deviceName;
     }
 
-    public void initialization(String browser) {
-    try {
-        if (browser.equalsIgnoreCase("chrome")) {
-            WebDriverManager.chromedriver().setup();
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--remote-allow-origins=*");
-            options.addArguments("--headless");
-            options.addArguments("--no-sandbox");
-            options.addArguments("--disable-dev-shm-usage");
-            options.addArguments("--disable-gpu");
-            driver = new ChromeDriver(options);
+    public static void main(String[] args) {
+        System.setProperty("webdriver.chrome.driver", "C:\\ProgramData\\chocolatey\\lib\\chromedriver\\tools\\chromedriver.exe");        
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        WebDriver driver = new ChromeDriver(options);
+        driver.get("https://d1msv2sqknn4w4.cloudfront.net/");
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(TIMEOUT));
         } else if (browser.equalsIgnoreCase("firefox")) {
             WebDriverManager.firefoxdriver().setup();
