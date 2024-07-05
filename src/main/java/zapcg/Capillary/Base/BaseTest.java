@@ -14,43 +14,37 @@ import zapcg.Cappilary.utils.ConfigReader;
 import zapcg.Cappilary.utils.DeviceData;
 
 public class BaseTest {
-    public static WebDriver driver;
-    protected String baseUrl;
-    protected Dimension dimension;
-    protected String deviceName;
-    public final static int TIMEOUT = 10;
-
-    public void setUp(String browser, String deviceName) {
-        ConfigReader configReader = new ConfigReader();
-        baseUrl = configReader.getProperty("url");
-        dimension = DeviceData.getDimension(deviceName);
-        this.deviceName = deviceName;
-    }
+    private static final int TIMEOUT = 30;
+    private static WebDriver driver;
 
     public static void main(String[] args) {
-        System.setProperty("webdriver.chrome.driver", "C:\\ProgramData\\chocolatey\\lib\\chromedriver\\tools\\chromedriver.exe");        
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
-        WebDriver driver = new ChromeDriver(options);
-        driver.get("https://d1msv2sqknn4w4.cloudfront.net/");
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(TIMEOUT));
-        } else if (browser.equalsIgnoreCase("firefox")) {
-            WebDriverManager.firefoxdriver().setup();
-            driver = new FirefoxDriver();
-        }
-
-            if (dimension != null) {
-                driver.manage().window().setSize(dimension);
+        try {
+            String browser = "chrome"; // Change this as needed
+            if (browser.equalsIgnoreCase("chrome")) {
+                System.setProperty("webdriver.chrome.driver", "C:\\ProgramData\\chocolatey\\lib\\chromedriver\\tools\\chromedriver.exe");
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--headless");
+                driver = new ChromeDriver(options);
+            } else if (browser.equalsIgnoreCase("firefox")) {
+                WebDriverManager.firefoxdriver().setup();
+                driver = new FirefoxDriver();
             }
+
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(TIMEOUT));
             driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+
+            // Open the desired URL
+            driver.get("https://d1msv2sqknn4w4.cloudfront.net/");
+
         } catch (Exception e) {
             System.err.println("Error initializing WebDriver: " + e.getMessage());
+        } finally {
             if (driver != null) {
                 driver.quit();
             }
         }
     }
+}
 
     @AfterMethod
     public void tearDown() {
