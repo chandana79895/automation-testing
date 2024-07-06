@@ -3,7 +3,7 @@
 <suite name="TestSuite" thread-count="1" parallel="tests">
   
   <listeners>
-<listener class-name="ListnersConfiguration.Listeners"/>
+<listener class-name="zapcg.Capillary.ExtentReport.Listeners"/>
 <listener class-name="zapcg.Capillary.ExtentReport.ExtentReportNG"/>
  </listeners>
   
