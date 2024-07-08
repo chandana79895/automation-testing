@@ -31,7 +31,9 @@ public class BaseTest {
     public void initialization(String browser) {
     	try {
         if (browser.equalsIgnoreCase("chrome")) {
-        	WebDriverManager.chromedriver().setup();
+        	// WebDriverManager.chromedriver().setup();
+             driver = webdriver.Chrome("/usr/bin/chromedriver", options=options)
+             driver.get("https://d1msv2sqknn4w4.cloudfront.net/")
         	 ChromeOptions options = new ChromeOptions();
              options.addArguments("--remote-allow-origins=*");
           // Adding detach option
