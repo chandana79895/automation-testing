@@ -34,5 +34,4 @@ jobs:
     - name: Build with Maven
       run: |
         cd
-        dir
         mvn clean install
