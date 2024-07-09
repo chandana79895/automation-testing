@@ -32,4 +32,6 @@ jobs:
       run: Start-Process "C:\Program Files\Google\Chrome\Application\chrome.exe" -ArgumentList "--headless", "--remote-debugging-port=9222"
 
     - name: Build with Maven
-      run: mvn clean install
+      run: |
+        cd
+        mvn clean install
