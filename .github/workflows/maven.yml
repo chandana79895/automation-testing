@@ -19,13 +19,13 @@ jobs:
         distribution: 'adopt'
         cache: 'maven'
 
-    - name: Install Chrome
-      run: |
-        choco install googlechrome --ignore-checksums
+    # - name: Install Chrome
+    #   run: |
+    #     choco install googlechrome --ignore-checksums
 
-    - name: Install Chromedriver
-      run: |
-        choco install chromedriver --ignore-checksums
+    # - name: Install Chromedriver
+    #   run: |
+    #     choco install chromedriver --ignore-checksums
 
     # - name: Start Chrome
     #   shell: powershell
