@@ -33,7 +33,7 @@ public class BaseTest {
         try {
             if (browser.equalsIgnoreCase("chrome")) {
                 // Hardcoding Chrome driver path
-                System.setProperty("webdriver.chrome.driver", ("user.dir") + "\\resources\\chromedriver-win64\\chromedriver.exe");
+                System.setProperty("webdriver.chrome.driver", ("user.dir") + "//src//resources//chromedriver-win64//chromedriver.exe");
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--remote-allow-origins=*");
                 // options.addArguments("--headless"); // Enable headless mode
