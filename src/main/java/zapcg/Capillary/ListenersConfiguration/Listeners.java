@@ -36,7 +36,7 @@ public class Listeners implements ITestListener {
 	@Override
 	public void onTestSkipped(ITestResult result) {
 	    System.out.println("The name of the testcase Skipped is : "+result.getName());
-	   // System.out.println("Exception: " + result.getThrowable().getMessage());
+	    System.out.println("Exception: " + result.getThrowable().getMessage());
 
 
 	}
