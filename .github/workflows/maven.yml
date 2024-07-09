@@ -22,7 +22,13 @@ jobs:
     - name: Enable debug logging
       run: |
         echo "ACTIONS_RUNNER_DEBUG=true" >> $GITHUB_ENV
-        echo "ACTIONS_STEP_DEBUG=true" >> $GITHUB_ENV    
+        echo "ACTIONS_STEP_DEBUG=true" >> $GITHUB_ENV
+
+    - name: Install Chrome
+      run: choco install googlechrome --ignore-checksums
+
+    - name: Install Chromedriver
+      run: choco install chromedriver --ignore-checksums
 
     - name: Build with Maven
       run: mvn clean install
