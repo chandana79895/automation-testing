@@ -19,19 +19,6 @@ jobs:
         distribution: 'adopt'
         cache: 'maven'
 
-    # - name: Install Chrome
-    #   run: |
-    #     choco install googlechrome --ignore-checksums
-
-    # - name: Install Chromedriver
-    #   run: |
-    #     choco install chromedriver --ignore-checksums
-
-    # - name: Start Chrome
-    #   shell: powershell
-    #   run: Start-Process "C:\Program Files\Google\Chrome\Application\chromedriver.exe" -ArgumentList "--headless", "--remote-debugging-port=9222"
-
     - name: Build with Maven
-      run: |
-        cd
-        mvn clean install
+      run: mvn clean install
+      working-directory: ${{ github.workspace }}
