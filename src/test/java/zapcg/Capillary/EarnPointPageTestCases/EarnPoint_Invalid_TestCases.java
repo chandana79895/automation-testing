@@ -49,16 +49,16 @@ public class EarnPoint_Invalid_TestCases extends BaseTest{
 	 
 	
 	
-	 @Test(priority=1)
-		public void verifyTransactionAmountShouldNotBeEmpty() throws InterruptedException {
+	 @Test(priority=1, groups = "EarnPoint")
+		public void verify_With_Empty_TransactionAmount() throws InterruptedException {
 		 epp.clickOnSubmitButton();
 		epp.txnFieldShouldNotBeEmpty(driver);
 		 		
 		
 	}
 
-	 @Test(priority=2)
-	 public void emptyTxnAmountButGoToPassPointValue()
+	 @Test(priority=2, groups = "EarnPoint")
+	 public void empty_TxnAmount_But_GoToPassPointValue()
 	 {
 		 epp.enterGoToPassPoint("12");
 		 epp.clickOnSubmitButton();
@@ -66,8 +66,8 @@ public class EarnPoint_Invalid_TestCases extends BaseTest{
 		 
 	 }
 	 
-	 @Test(priority=3)
-	 public void goTOPassPointMoreThanTransactionAmount()
+	 @Test(priority=3, groups = "EarnPoint")
+	 public void goTOPassPoint_More_Than_TransactionAmount()
 	 {
 		 // Perform transaction with Go To Pass points used exceeding transaction amount
 	        int transactionAmount = 1;

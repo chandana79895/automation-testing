@@ -49,8 +49,8 @@ public class memberLookup_Invalid_TestCases extends BaseTest {
   
 		
 		//memberID: starts with GT, length 11
-		@Test(priority=25)
-		public void verifyInvalidMemberID() {
+		@Test(priority=1, groups = "MemberLookup")
+		public void verify_Invalid_MemberID() {
 			memberLookupPage mlp = new memberLookupPage(driver);
 			mlp.enterMemberId("GT0000898089");
 			mlp.clickOnSearchButton();
@@ -59,8 +59,8 @@ public class memberLookup_Invalid_TestCases extends BaseTest {
 			
 			}
 		
-		@Test(priority=26)
-		public void verifyMemberIdFieldMaxLength() {
+		@Test(priority=2, groups = "MemberLookup")
+		public void verify_MemberId_Field_MaxLength() {
 			memberLookupPage mlp = new memberLookupPage(driver);
 			mlp.enterMemberId("GT00000367323323211");
 			mlp.clickOnSearchButton();
@@ -70,8 +70,8 @@ public class memberLookup_Invalid_TestCases extends BaseTest {
 			}
 		
 		//valid card number:  7 to 11 characters.
-		@Test(priority=27)
-		public void verifyInvalidCardNumberMinLength() {
+		@Test(priority=3, groups = "MemberLookup")
+		public void verify_Invalid_CardNumber_MinLength() {
 			memberLookupPage mlp = new memberLookupPage(driver);
 			mlp.enterMemberId("123456");
 			mlp.clickOnSearchButton();
@@ -81,8 +81,8 @@ public class memberLookup_Invalid_TestCases extends BaseTest {
 			}
 		
 		//valid card number:  7 to 11 characters.
-		@Test(priority=28)
-		public void verifyCardNumberFieldMaxLength() {
+		@Test(priority=4, groups = "MemberLookup")
+		public void verify_CardNumber_Field_MaxLength() {
 			memberLookupPage mlp = new memberLookupPage(driver);
 			mlp.enterMemberId("123456789098");
 			mlp.clickOnSearchButton();
@@ -92,8 +92,8 @@ public class memberLookup_Invalid_TestCases extends BaseTest {
 			}
 		
 		
-		@Test(priority=29)
-		public void verifyForEmptyCardNumberButtonIsDisabled() {
+		@Test(priority=5, groups = "MemberLookup")
+		public void verify_Empty_CardNumber_ButtonIsDisabled() {
 			memberLookupPage mlp = new memberLookupPage(driver);
 			mlp.enterMemberId("");
 			mlp.verifySearchButtonDisableForEmptyInput();

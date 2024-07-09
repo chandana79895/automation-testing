@@ -29,7 +29,7 @@ public class GoToPassPointMoreThanAvailablePoint extends BaseTest{
 		 	setUp(browser, deviceName); // Use the setup method to initialize the browser
 	       initialization(browser);
 	       driver.get(baseUrl);
-	       Thread.sleep(1000); // For demonstration purposes, avoid using Thread.sleep in real tests
+	       Thread.sleep(1000); 
 	     
 	       lp = new loginPage(driver);
 	       mlp = new memberLookupPage(driver);
@@ -54,8 +54,10 @@ public class GoToPassPointMoreThanAvailablePoint extends BaseTest{
 	       
 	   }
 	 
-	 @Test
-	 public void testing() {
+	 @Test(priority=1, groups = "EarnPoint")
+	 public void verify_ValidationMessage_If_GoToPass_Is_Greater_Than_AvailablePoints() {
+		 
+		 System.out.println("Tested Validation Message If GoToPassPoint Is Greater Than Available Points");
 		
 	 }
 

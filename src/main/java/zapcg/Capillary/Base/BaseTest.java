@@ -33,9 +33,11 @@ public class BaseTest {
         try {
             if (browser.equalsIgnoreCase("chrome")) {
                 // Hardcoding Chrome driver path
-                System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+                System.setProperty("webdriver.chrome.driver", "C:\\BrowserDriver\\ChromeDriver\\chromedriver-win64\\chromedriver.exe");
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--remote-allow-origins=*");
+                options.addArguments("--headless"); // Enable headless mode
+
                 // Adding detach option
                 options.setExperimentalOption("detach", true);
                 // Handling SSL certificates
@@ -45,6 +47,8 @@ public class BaseTest {
                 // Hardcoding Firefox driver path
                 System.setProperty("webdriver.gecko.driver", "C:\\BrowserDriver\\FirefoxDriver\\geckodriver.exe");
                 FirefoxOptions options = new FirefoxOptions();
+               // options.addArguments("--headless"); // Enable headless mode
+
                 // Handling SSL certificates
                 options.setAcceptInsecureCerts(true);
                 driver = new FirefoxDriver(options);            }

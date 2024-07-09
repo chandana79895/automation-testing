@@ -35,8 +35,8 @@ public class OneTimeExecute_Login_LockOutTestCase extends BaseTest{
    }
 		
 
-   @Test(priority=11)
-	public void verifyValidationMessageFor5InvalidLoginAttempt_TestCase11() throws InterruptedException
+   @Test(priority=1,groups = "OneTimeExecution")
+	public void verify_ValidationMessage_For5Invalid_LoginAttempt() throws InterruptedException
 		//after 5 invalid attempts user won't be able to login for 30min
 	{	
        // Try logging in with invalid credentials 5 times

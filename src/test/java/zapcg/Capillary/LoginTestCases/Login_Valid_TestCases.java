@@ -37,7 +37,7 @@ public class Login_Valid_TestCases extends BaseTest {
 	
 	
 
-	@Test(priority = 1)
+	@Test(priority = 1, groups = "Login")
     public void testValidLogin_TestCase1() throws InterruptedException {
 	        lp.login("zapcom_test2", "storeportal");
 	      

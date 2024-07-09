@@ -4,17 +4,42 @@
   <listeners>
     <listener class-name="zapcg.Capillary.ListenersConfiguration.Listeners"/>
   </listeners>
-  <test thread-count="1" parallel="tests" name="LoginTestsChromeBrowserTabletLandscape(failed)">
+  <test thread-count="1" parallel="tests" name="LoginTestsChromeBrowserTabletPortrait(failed)">
     <parameter name="browser" value="chrome"/>
-    <parameter name="deviceName" value="Tablet Landscape"/>
+    <parameter name="deviceName" value="Tablet Portrait"/>
     <classes>
-      <class name="zapcg.Capillary.MemberLookupTestCases.MemberLookup_TestCases">
+      <class name="zapcg.Capillary.EarnPointPageTestCases.EarnPoint_Valid_TestCases">
         <methods>
-          <include name="enterValidMemberId"/>
+          <include name="verify_SuccessMessage_For_RedeemPoint"/>
           <include name="initialize"/>
           <include name="tearDown"/>
+          <include name="verify_MemberDetails_Content_Displaying_On_EarnPointScreen"/>
+          <include name="verify_ExceedThresold_SuccessMessage"/>
         </methods>
-      </class> <!-- zapcg.Capillary.MemberLookupTestCases.MemberLookup_TestCases -->
+      </class> <!-- zapcg.Capillary.EarnPointPageTestCases.EarnPoint_Valid_TestCases -->
+      <class name="zapcg.Capillary.EarnPointPageTestCases.EarnPoint_Invalid_TestCases">
+        <methods>
+          <include name="tearDown"/>
+          <include name="goTOPassPoint_More_Than_TransactionAmount"/>
+          <include name="initialize"/>
+        </methods>
+      </class> <!-- zapcg.Capillary.EarnPointPageTestCases.EarnPoint_Invalid_TestCases -->
+      <class name="zapcg.Capillary.LocationPageTestCases.Location_ExistingUser_TestCases">
+        <methods>
+          <include name="verify_Header_Of_MemberLookup_Screen"/>
+          <include name="initialize"/>
+          <include name="navigated_From_Location_To_LookupScreen_With_Valid_Inputs"/>
+          <include name="tearDown"/>
+          <include name="choose_ValidLocation_For_NewUser"/>
+        </methods>
+      </class> <!-- zapcg.Capillary.LocationPageTestCases.Location_ExistingUser_TestCases -->
+      <class name="zapcg.Capillary.MemberDetailsTestCases.memberDetails_TestCases">
+        <methods>
+          <include name="initialize"/>
+          <include name="tearDown"/>
+          <include name="verify_MemberDetails_ContentDisplaying"/>
+        </methods>
+      </class> <!-- zapcg.Capillary.MemberDetailsTestCases.memberDetails_TestCases -->
     </classes>
-  </test> <!-- LoginTestsChromeBrowserTabletLandscape(failed) -->
+  </test> <!-- LoginTestsChromeBrowserTabletPortrait(failed) -->
 </suite> <!-- Failed suite [TestSuite] -->

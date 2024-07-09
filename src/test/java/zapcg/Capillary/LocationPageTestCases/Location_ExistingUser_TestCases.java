@@ -41,8 +41,8 @@ public class Location_ExistingUser_TestCases extends BaseTest{
 			}
                 
           
-                @Test(priority = 11)
-                public void chooseValidLocationForNewUser() throws InterruptedException {
+                @Test(priority = 1, groups = "Location")
+                public void choose_ValidLocation_For_NewUser() throws InterruptedException {
                 	
                     locationSelectionPage locp = new locationSelectionPage(driver);
                     
@@ -61,8 +61,8 @@ public class Location_ExistingUser_TestCases extends BaseTest{
             		}
                 
                 
-                @Test(priority = 12)
-                public void verifyDropDownAvailability() throws InterruptedException {
+                @Test(priority = 2, groups = "Location")
+                public void verify_DropDown_Availability() throws InterruptedException {
                 	
                 	locationSelectionPage locp = new locationSelectionPage(driver);
                 	 // Verify that both dropdowns are present
@@ -71,8 +71,8 @@ public class Location_ExistingUser_TestCases extends BaseTest{
                 }
                 
                 
-                @Test(priority = 13 )
-                public void verifyIfAbleToSelectOptionFromDropDown() throws InterruptedException {
+                @Test(priority = 3, groups = "Location" )
+                public void verify_Able_To_SelectOption_From_DropDown() throws InterruptedException {
                 	
                 	locationSelectionPage locp = new locationSelectionPage(driver);
                 	 // Verify that both dropdowns are present
@@ -93,8 +93,8 @@ public class Location_ExistingUser_TestCases extends BaseTest{
                     }  
                 }
                 
-                @Test(priority = 14 )
-                public void verifyChooseLocationButtonAvailability() throws InterruptedException {
+                @Test(priority = 4, groups = "Location" )
+                public void verify_Choose_Location_Button_Availability() throws InterruptedException {
                 	
                 	locationSelectionPage locp = new locationSelectionPage(driver);
                 	 // Verify that both dropdowns are present
@@ -111,8 +111,8 @@ public class Location_ExistingUser_TestCases extends BaseTest{
 
               
                 
-                @Test(priority = 15)
-                public void verifyHeaderOfMemberLookupScreen() {
+                @Test(priority = 5, groups = "Location")
+                public void verify_Header_Of_MemberLookup_Screen() {
                 	
                 	locationSelectionPage locp = new locationSelectionPage(driver);
                 	memberLookupPage mlp=new memberLookupPage(driver);
@@ -156,8 +156,8 @@ public class Location_ExistingUser_TestCases extends BaseTest{
                 
            
 			
-			@Test(priority = 16 )
-            public void burgerIconMemberLookupNavigation() throws InterruptedException {
+			@Test(priority = 6 , groups = "Location" )
+            public void hamburgerIcon_MemberLookup_Navigation_From_LocationScreen() throws InterruptedException {
             	
             	locationSelectionPage locp = new locationSelectionPage(driver);
             	
@@ -169,8 +169,8 @@ public class Location_ExistingUser_TestCases extends BaseTest{
 			}
 			
 
-			@Test(priority = 17 )
-            public void burgerIconMemberLocationNavigation() throws InterruptedException {
+			@Test(priority = 7, groups = "Location" )
+            public void hamburgerIcon_MemberLocation_Navigation_From_LocationScreen() throws InterruptedException {
             	
             	locationSelectionPage locp = new locationSelectionPage(driver);
             	
@@ -181,8 +181,8 @@ public class Location_ExistingUser_TestCases extends BaseTest{
             	
 			}
 			
-			@Test(priority = 18 )
-            public void burgerIconLogout() throws InterruptedException {
+			@Test(priority = 8, groups = "Location" )
+            public void hamburger_Icon_Logout_From_LocationScreen() throws InterruptedException {
             	
             	locationSelectionPage locp = new locationSelectionPage(driver);
             	
@@ -193,8 +193,8 @@ public class Location_ExistingUser_TestCases extends BaseTest{
             	
 			}
 			
-			@Test(priority = 19 )
-            public void navigatedFromLocationToLookupScreen() throws InterruptedException {
+			@Test(priority = 9, groups = "Location" )
+            public void navigated_From_Location_To_LookupScreen_With_Valid_Inputs() throws InterruptedException {
             	
             	locationSelectionPage locp = new locationSelectionPage(driver);
 
