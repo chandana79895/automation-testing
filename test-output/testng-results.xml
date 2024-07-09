@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="10" passed="10" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2024-07-09T13:02:30 IST" name="TestSuite" finished-at="2024-07-09T13:03:29 IST" duration-ms="58020">
+    <groups>
+    </groups>
+    <test started-at="2024-07-09T13:02:30 IST" name="LoginTestsChromeBrowserTabletLandscape" finished-at="2024-07-09T13:03:29 IST" duration-ms="58020">
+      <class name="zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases">
+        <test-method is-config="true" signature="initialize(java.lang.String,java.lang.String)[pri:0, instance:zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases@75ed9710]" started-at="2024-07-09T13:02:38 IST" name="initialize" finished-at="2024-07-09T13:02:42 IST" duration-ms="3636" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Tablet Landscape]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initialize -->
+        <test-method signature="testInvalidUsername_TestCase2()[pri:2, instance:zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases@75ed9710]" started-at="2024-07-09T13:02:42 IST" name="testInvalidUsername_TestCase2" finished-at="2024-07-09T13:02:44 IST" duration-ms="1608" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testInvalidUsername_TestCase2 -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases@75ed9710]" started-at="2024-07-09T13:02:44 IST" name="tearDown" finished-at="2024-07-09T13:02:44 IST" duration-ms="691" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="initialize(java.lang.String,java.lang.String)[pri:0, instance:zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases@75ed9710]" started-at="2024-07-09T13:02:44 IST" name="initialize" finished-at="2024-07-09T13:02:48 IST" duration-ms="3641" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Tablet Landscape]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initialize -->
+        <test-method signature="testInvalidPassword_TestCase3()[pri:3, instance:zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases@75ed9710]" started-at="2024-07-09T13:02:48 IST" name="testInvalidPassword_TestCase3" finished-at="2024-07-09T13:02:50 IST" duration-ms="2137" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testInvalidPassword_TestCase3 -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases@75ed9710]" started-at="2024-07-09T13:02:50 IST" name="tearDown" finished-at="2024-07-09T13:02:51 IST" duration-ms="674" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="initialize(java.lang.String,java.lang.String)[pri:0, instance:zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases@75ed9710]" started-at="2024-07-09T13:02:51 IST" name="initialize" finished-at="2024-07-09T13:02:55 IST" duration-ms="3852" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Tablet Landscape]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initialize -->
+        <test-method signature="testTooLongUsername_TestCase4()[pri:4, instance:zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases@75ed9710]" started-at="2024-07-09T13:02:55 IST" name="testTooLongUsername_TestCase4" finished-at="2024-07-09T13:02:56 IST" duration-ms="1201" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testTooLongUsername_TestCase4 -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases@75ed9710]" started-at="2024-07-09T13:02:56 IST" name="tearDown" finished-at="2024-07-09T13:02:57 IST" duration-ms="712" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="initialize(java.lang.String,java.lang.String)[pri:0, instance:zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases@75ed9710]" started-at="2024-07-09T13:02:57 IST" name="initialize" finished-at="2024-07-09T13:03:00 IST" duration-ms="3822" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Tablet Landscape]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initialize -->
+        <test-method signature="testMinLengthPassword_TestCase5()[pri:5, instance:zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases@75ed9710]" started-at="2024-07-09T13:03:00 IST" name="testMinLengthPassword_TestCase5" finished-at="2024-07-09T13:03:01 IST" duration-ms="842" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMinLengthPassword_TestCase5 -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases@75ed9710]" started-at="2024-07-09T13:03:01 IST" name="tearDown" finished-at="2024-07-09T13:03:02 IST" duration-ms="732" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="initialize(java.lang.String,java.lang.String)[pri:0, instance:zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases@75ed9710]" started-at="2024-07-09T13:03:02 IST" name="initialize" finished-at="2024-07-09T13:03:06 IST" duration-ms="4082" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Tablet Landscape]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initialize -->
+        <test-method signature="testUsernameWithSpaces_TestCase6()[pri:6, instance:zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases@75ed9710]" started-at="2024-07-09T13:03:06 IST" name="testUsernameWithSpaces_TestCase6" finished-at="2024-07-09T13:03:07 IST" duration-ms="561" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testUsernameWithSpaces_TestCase6 -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases@75ed9710]" started-at="2024-07-09T13:03:07 IST" name="tearDown" finished-at="2024-07-09T13:03:07 IST" duration-ms="657" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="initialize(java.lang.String,java.lang.String)[pri:0, instance:zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases@75ed9710]" started-at="2024-07-09T13:03:07 IST" name="initialize" finished-at="2024-07-09T13:03:11 IST" duration-ms="3769" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Tablet Landscape]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initialize -->
+        <test-method signature="verifyForEnabledLoginButton_TestCase7()[pri:7, instance:zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases@75ed9710]" started-at="2024-07-09T13:03:11 IST" name="verifyForEnabledLoginButton_TestCase7" finished-at="2024-07-09T13:03:14 IST" duration-ms="2584" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyForEnabledLoginButton_TestCase7 -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases@75ed9710]" started-at="2024-07-09T13:03:14 IST" name="tearDown" finished-at="2024-07-09T13:03:14 IST" duration-ms="696" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="initialize(java.lang.String,java.lang.String)[pri:0, instance:zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases@75ed9710]" started-at="2024-07-09T13:03:14 IST" name="initialize" finished-at="2024-07-09T13:03:18 IST" duration-ms="3329" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Tablet Landscape]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initialize -->
+        <test-method signature="verifyForDisabledLoginButtonForEmptyUsername_TestCase8()[pri:8, instance:zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases@75ed9710]" started-at="2024-07-09T13:03:18 IST" name="verifyForDisabledLoginButtonForEmptyUsername_TestCase8" finished-at="2024-07-09T13:03:18 IST" duration-ms="440" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyForDisabledLoginButtonForEmptyUsername_TestCase8 -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases@75ed9710]" started-at="2024-07-09T13:03:18 IST" name="tearDown" finished-at="2024-07-09T13:03:19 IST" duration-ms="709" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="initialize(java.lang.String,java.lang.String)[pri:0, instance:zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases@75ed9710]" started-at="2024-07-09T13:03:19 IST" name="initialize" finished-at="2024-07-09T13:03:22 IST" duration-ms="3566" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Tablet Landscape]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initialize -->
+        <test-method signature="verifyForDisabledLoginButtonForEmptyPassword_TestCase9()[pri:9, instance:zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases@75ed9710]" started-at="2024-07-09T13:03:22 IST" name="verifyForDisabledLoginButtonForEmptyPassword_TestCase9" finished-at="2024-07-09T13:03:23 IST" duration-ms="589" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyForDisabledLoginButtonForEmptyPassword_TestCase9 -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases@75ed9710]" started-at="2024-07-09T13:03:23 IST" name="tearDown" finished-at="2024-07-09T13:03:24 IST" duration-ms="707" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="initialize(java.lang.String,java.lang.String)[pri:0, instance:zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases@75ed9710]" started-at="2024-07-09T13:03:24 IST" name="initialize" finished-at="2024-07-09T13:03:27 IST" duration-ms="3854" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Tablet Landscape]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initialize -->
+        <test-method signature="verifyForDisabledLoginButtonForEmptyUsernamePassword_TestCase10()[pri:10, instance:zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases@75ed9710]" started-at="2024-07-09T13:03:27 IST" name="verifyForDisabledLoginButtonForEmptyUsernamePassword_TestCase10" finished-at="2024-07-09T13:03:28 IST" duration-ms="336" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyForDisabledLoginButtonForEmptyUsernamePassword_TestCase10 -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases@75ed9710]" started-at="2024-07-09T13:03:28 IST" name="tearDown" finished-at="2024-07-09T13:03:29 IST" duration-ms="705" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases -->
+      <class name="zapcg.Capillary.LoginTestCases.Login_Valid_TestCases">
+        <test-method is-config="true" signature="initialize(java.lang.String,java.lang.String)[pri:0, instance:zapcg.Capillary.LoginTestCases.Login_Valid_TestCases@422c3c7a]" started-at="2024-07-09T13:02:31 IST" name="initialize" finished-at="2024-07-09T13:02:35 IST" duration-ms="4717" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Tablet Landscape]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initialize -->
+        <test-method signature="testValidLogin_TestCase1()[pri:1, instance:zapcg.Capillary.LoginTestCases.Login_Valid_TestCases@422c3c7a]" started-at="2024-07-09T13:02:35 IST" name="testValidLogin_TestCase1" finished-at="2024-07-09T13:02:38 IST" duration-ms="2489" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testValidLogin_TestCase1 -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:zapcg.Capillary.LoginTestCases.Login_Valid_TestCases@422c3c7a]" started-at="2024-07-09T13:02:38 IST" name="tearDown" finished-at="2024-07-09T13:02:38 IST" duration-ms="603" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- zapcg.Capillary.LoginTestCases.Login_Valid_TestCases -->
+    </test> <!-- LoginTestsChromeBrowserTabletLandscape -->
+  </suite> <!-- TestSuite -->
+</testng-results>
