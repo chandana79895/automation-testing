@@ -33,7 +33,7 @@ public class BaseTest {
         try {
             if (browser.equalsIgnoreCase("chrome")) {
                 // Hardcoding Chrome driver path
-                System.setProperty("webdriver.chrome.driver", "C:\\BrowserDriver\\ChromeDriver\\chromedriver-win64\\chromedriver.exe");
+                System.setProperty("webdriver.chrome.driver", "C:\\automation-testing\\resources\\chromedriver-win64\\chromedriver.exe");
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--remote-allow-origins=*");
                 // Adding detach option
