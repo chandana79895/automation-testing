@@ -36,7 +36,7 @@ public class BaseTest {
                 System.setProperty("webdriver.chrome.driver", "D:\\a\\automation-testing\\automation-testing\\src\\resources\\chromedriver-win64\\chromedriver.exe");
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--remote-allow-origins=*");
-                // options.addArguments("--headless"); // Enable headless mode
+                options.addArguments("--headless"); // Enable headless mode
 
                 // Adding detach option
                 options.setExperimentalOption("detach", true);
