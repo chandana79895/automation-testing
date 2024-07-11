@@ -9,6 +9,9 @@ jobs:
   deploy:
     runs-on: self-hosted
 
+    container:
+      image: maven:latest
+
     steps:
     - uses: actions/checkout@v2
 
@@ -18,9 +21,6 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
         cache: 'maven'
-
-    - name: Set up Maven
-      run: apt-get install -y maven  # Replace with appropriate command for your environment
 
     - name: Build with Maven
       run: mvn clean install
