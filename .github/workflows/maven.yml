@@ -19,23 +19,18 @@ jobs:
         distribution: 'adopt'
         cache: 'maven'
 
-    # - name: Google Chrome Setup
-    #   run: |
-    #     sudo apt-get install -y gnupg
-    #     sudo curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-    #     sudo echo "deb [arch=amd64]  http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list
-    #     sudo apt-get -y update
-    #     sudo apt-get -y install google-chrome-stable  
-
     - name: Googledriver setup
       run: |
         sudo apt install wget -y
         sudo apt install unzip -y
-        wget https://chromedriver.storage.googleapis.com/2.41/chromedriver_linux64.zip
-        unzip chromedriver_linux64.zip  
+        wget https://dl.google.com/linux/deb/pool/main/g/google-chrome-stable/google-chrome-stable_126.0.6478.126-1_amd64.deb
+        sudo dpkg -i google-chrome-stable_126.0.6478.126-1_amd64.deb
+        wget https://storage.googleapis.com/chrome-for-testing-public/126.0.6478.126/linux64/chromedriver-linux64.zip
+        unzip chromedriver-linux64.zip  
         sudo mv chromedriver /usr/bin/chromedriver
         sudo chown runner:runner /usr/bin/chromedriver
         sudo chmod +x /usr/bin/chromedriver  
+        chromedriver 
 
     - name: Set up Maven
       run: sudo apt-get install -y maven        
