@@ -29,9 +29,8 @@ jobs:
         unzip chromedriver-linux64.zip  
         sudo mv chromedriver /usr/bin/chromedriver
         sudo chown runner:runner /usr/bin/chromedriver
-        sudo chmod +x /usr/bin/chromedriver  
-        chromedriver 
-
+        sudo chmod +x /usr/bin/chromedriver 
+        
     - name: Set up Maven
       run: sudo apt-get install -y maven        
       
