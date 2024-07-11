@@ -47,3 +47,18 @@ jobs:
         ls -la
         pwd
         mvn clean install
+
+    - name: Debug info
+      run: |
+        echo "Java version:"
+        java -version
+        echo "Chrome version:"
+        google-chrome --version
+        echo "ChromeDriver version:"
+        chromedriver --version
+        echo "Current directory:"
+        pwd
+        echo "Contents of /usr/bin:"
+        ls -la /usr/bin
+        echo "Contents of /usr/local/bin:"
+        ls -la /usr/local/bin
