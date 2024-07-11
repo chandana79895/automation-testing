@@ -29,6 +29,7 @@ jobs:
 
     - name: Googledriver setup
       run: |
+        sudo apt install wget -y
         wget https://chromedriver.storage.googleapis.com/2.41/chromedriver_linux64.zip
         unzip chromedriver_linux64.zip  
         sudo mv chromedriver /usr/bin/chromedriver
