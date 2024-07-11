@@ -33,7 +33,8 @@ public class BaseTest {
         try {
             if (browser.equalsIgnoreCase("chrome")) {
                 // Hardcoding Chrome driver path
-                System.setProperty("webdriver.chrome.driver", "//home//runner//actions-runner//_work//automation-testing//automation-testing//src//resources//chromedriver-linux64//chromedriver");
+                System.setProperty("webdriver.chrome.driver", "/home/runner/actions-runner/_work/automation-testing/automation-testing/src/resources/chromedriver-linux64/chromedriver");
+                // WebDriver driver = new ChromeDriver();
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--remote-allow-origins=*");
                 options.addArguments("--headless"); // Enable headless mode
