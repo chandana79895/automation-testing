@@ -19,16 +19,16 @@ jobs:
         distribution: 'adopt'
         cache: 'maven'
 
-    - name: Update apt-get
-      run: apt-get update
+    # - name: Update apt-get
+    #   run: apt-get update
 
-    - name: Fix broken dependencies
-      run: apt --fix-broken install -y
+    # - name: Fix broken dependencies
+    #   run: apt --fix-broken install -y
 
-    - name: Set up Maven and dependencies
-      run: |
-        apt-get update
-        apt-get install -y libasound2 libasound2-data libnspr4 libnss3 default-jre-headless libjansi-java libmaven3-core-java libwagon-file-java libwagon-http-shaded-java
+    # - name: Set up Maven and dependencies
+    #   run: |
+    #     apt-get update
+    #     apt-get install -y libasound2 libasound2-data libnspr4 libnss3 default-jre-headless libjansi-java libmaven3-core-java libwagon-file-java libwagon-http-shaded-java
 
     - name: Googledriver setup
       run: |
