@@ -42,23 +42,23 @@ jobs:
         sudo chown runner:runner /usr/bin/chromedriver
         sudo chmod +x /usr/bin/chromedriver
 
-    - name: Debug info
-      run: |
-        echo "Java version:"
-        java -version
-        echo "Chrome version:"
-        google-chrome --version
-        echo "ChromeDriver version:"
-        chromedriver --version
-        echo "Current directory:"
-        pwd
-        echo "Contents of /usr/bin:"
-        ls -la /usr/bin
-        echo "Contents of /usr/local/bin:"
-        ls -la /usr/local/bin
-         
+    # - name: Debug info
+    #   run: |
+    #     echo "Java version:"
+    #     java -version
+    #     echo "Chrome version:"
+    #     google-chrome --version
+    #     echo "ChromeDriver version:"
+    #     chromedriver --version
+    #     echo "Current directory:"
+    #     pwd
+    #     echo "Contents of /usr/bin:"
+    #     ls -la /usr/bin
+    #     echo "Contents of /usr/local/bin:"
+    #     ls -la /usr/local/bin
+
     - name: Build with Maven
       run: |
-        ls -la
-        pwd
+        cd /usr/bin
+        chromedriver
         mvn clean install
