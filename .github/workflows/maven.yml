@@ -41,12 +41,6 @@ jobs:
         sudo mv chromedriver-linux64/chromedriver /usr/bin/chromedriver
         sudo chown runner:runner /usr/bin/chromedriver
         sudo chmod +x /usr/bin/chromedriver
-        
-    - name: Build with Maven
-      run: |
-        ls -la
-        pwd
-        mvn clean install
 
     - name: Debug info
       run: |
@@ -62,3 +56,9 @@ jobs:
         ls -la /usr/bin
         echo "Contents of /usr/local/bin:"
         ls -la /usr/local/bin
+         
+    - name: Build with Maven
+      run: |
+        ls -la
+        pwd
+        mvn clean install
