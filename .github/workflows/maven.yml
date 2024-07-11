@@ -19,13 +19,11 @@ jobs:
         distribution: 'adopt'
         cache: 'maven'
 
-    - name: Set up Maven
-      run: sudo apt-get update && sudo apt-get install -y \
-           maven \
-           libasound2 \
-           libnspr4 \
-           libnss3 \
-           && apt-get clean && rm -rf /var/lib/apt/lists/*
+    - name: Update apt-get
+      run: sudo apt-get update
+
+    - name: Set up Maven and dependencies
+      run: sudo apt-get install -y maven libasound2 libnspr4 libnss3
 
     - name: Googledriver setup
       run: |
@@ -35,11 +33,10 @@ jobs:
         sudo dpkg -i google-chrome-stable_126.0.6478.126-1_amd64.deb
         wget https://storage.googleapis.com/chrome-for-testing-public/126.0.6478.126/linux64/chromedriver-linux64.zip
         unzip chromedriver-linux64.zip  
-        sudo mv chromedriver /usr/bin/chromedriver
+        sudo mv chromedriver-linux64/chromedriver /usr/bin/chromedriver
         sudo chown runner:runner /usr/bin/chromedriver
-        sudo chmod +x /usr/bin/chromedriver 
+        sudo chmod +x /usr/bin/chromedriver
         
-      
     - name: Build with Maven
       run: |
         ls -la
