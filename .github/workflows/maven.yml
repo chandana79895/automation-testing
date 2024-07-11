@@ -19,6 +19,12 @@ jobs:
         distribution: 'adopt'
         cache: 'maven'
 
+    - name: Create .m2 directory
+      run: mkdir -p ~/.m2
+
+    - name: Fix permissions for .m2 directory
+      run: chmod -R 777 ~/.m2
+
     # - name: Update apt-get
     #   run: apt-get update
 
