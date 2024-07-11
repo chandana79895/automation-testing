@@ -63,5 +63,5 @@ jobs:
     - name: Start xvfb
       run: |
         export DISPLAY=:99
-        xvfb-run -a mvn clean install
+        xvfb-run -a mvn clean install -Dbrowser=chrome
 
