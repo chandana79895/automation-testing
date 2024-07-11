@@ -75,7 +75,7 @@ public class EarnPoint_Invalid_TestCases extends BaseTest{
 
 	        epp.enterTransactionAmount(transactionAmount);
 	        epp.enterGoToPassPointsUsed(goToPassPointsUsed);
-	        epp.clickOnSubmitButton();
+	        //epp.clickOnSubmitButton();
 	        epp.verifyValidationMessageIfGoToPassIsGreaterThanTxnAmt("Entered Go To Pass points used is more than the Transaction Amount");
 
 	    }

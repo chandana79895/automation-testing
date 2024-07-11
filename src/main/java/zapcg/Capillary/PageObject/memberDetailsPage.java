@@ -1,16 +1,20 @@
 package zapcg.Capillary.PageObject;
 
 import java.time.Duration;
+import java.util.function.Function;
+
 
 import java.util.NoSuchElementException;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -100,7 +104,7 @@ public WebDriver driver;
 			public void verifySuccessfullNavigationFromMemberLookupToMemberDetailsPage(WebDriver driver) {
 				try {
 					// Create an instance of WebDriverWait with a timeout of 10 seconds
-			        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 			        // Wait for the URL to change to the expected URL
 			        WebElement pageLoaded = wait.until(ExpectedConditions.visibilityOf(memberDetailsPageContainer));
@@ -124,7 +128,7 @@ public WebDriver driver;
 			public void verifyMemberDetailsDisplaying(WebDriver driver) {
 				try {
 					// Create an instance of WebDriverWait with a timeout of 10 seconds
-			        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 			        // Wait for the URL to change to the expected URL
 			        WebElement pageLoaded = wait.until(ExpectedConditions.visibilityOf(memberDetailsSection));
@@ -144,8 +148,67 @@ public WebDriver driver;
 			}
 			
 			public void verifyTheMemberDetailsContentDisplaying(WebDriver driver) {
-				 
-				 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+				
+				
+				
+				FluentWait<WebDriver> wait = new FluentWait<>(driver)
+		                .withTimeout(Duration.ofSeconds(30))
+		                .pollingEvery(Duration.ofMillis(500))
+		                .ignoring(NoSuchElementException.class)
+		                .ignoring(StaleElementReferenceException.class);
+
+		        try {
+		            // Wait for the elements to be visible using Fluent Wait
+		            WebElement memberDetailsSection = wait.until(new Function<WebDriver, WebElement>() {
+		                public WebElement apply(WebDriver driver) {
+		                    return driver.findElement(memberDetailsSectionLocator);
+		                }
+		            });
+
+		            WebElement memberName = wait.until(new Function<WebDriver, WebElement>() {
+		                public WebElement apply(WebDriver driver) {
+		                    return driver.findElement(memberNameLocator);
+		                }
+		            });
+
+		            WebElement availablePoints = wait.until(new Function<WebDriver, WebElement>() {
+		                public WebElement apply(WebDriver driver) {
+		                    return driver.findElement(availablePointsLocator);
+		                }
+		            });
+
+		            WebElement membershipId = wait.until(new Function<WebDriver, WebElement>() {
+		                public WebElement apply(WebDriver driver) {
+		                    return driver.findElement(membershipIdLocator);
+		                }
+		            });
+
+		            WebElement pointsExpiryDate = wait.until(new Function<WebDriver, WebElement>() {
+		                public WebElement apply(WebDriver driver) {
+		                    return driver.findElement(pointsExpiryDateLocator);
+		                }
+		            });
+
+		            // Verify that all the elements are displayed and print their details
+		            if (memberDetailsSection.isDisplayed() && memberName.isDisplayed() && availablePoints.isDisplayed() && membershipId.isDisplayed() && pointsExpiryDate.isDisplayed()) {
+		                System.out.println("Member details are displaying.");
+		                System.out.println("Member Name: " + memberName.getText());
+		                System.out.println("Available Points: " + availablePoints.getText());
+		                System.out.println("Membership ID: " + membershipId.getText());
+		                System.out.println("Points Expiry Date: " + pointsExpiryDate.getText());
+		            } else {
+		                System.out.println("Some expected elements did not become visible within the timeout period.");
+		                Assert.fail("Member details are not fully displaying.");
+		            }
+		        } catch (TimeoutException e) {
+		            System.err.println("Timeout waiting for member details elements: " + e.getMessage());
+		            Assert.fail("An error occurred during Member details verification: Timeout waiting for elements.");
+		        } catch (Exception e) {
+		            System.err.println("An unexpected error occurred during Member details verification: " + e.getMessage());
+		            Assert.fail("An unexpected error occurred during Member details verification: " + e.getMessage());
+		        }
+				 /*
+				 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			        WebElement memberDetailsSection = null;
 			        WebElement memberName = null;
 			        WebElement availablePoints = null;
@@ -190,7 +253,8 @@ public WebDriver driver;
 			            System.out.println("An error occurred on Member details screen: " + e.getMessage());
 			            Assert.fail("An error occurred during Member details verification: " + e.getMessage());
 			        }
-			
+			*/
+				
 		
 
 			}
@@ -198,7 +262,7 @@ public WebDriver driver;
 			
 			public void clickOnEnterReceiptButton() {
 				// Create an instance of WebDriverWait with a timeout of 10 seconds
-	            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 	            // Wait for the login button to be clickable (enabled)
 	            WebElement clickOnEnterReceiptButton = wait.until(ExpectedConditions.elementToBeClickable(enterReceiptDetailsButton));
@@ -214,7 +278,7 @@ public WebDriver driver;
 					try {
 
 			            // Create an instance of WebDriverWait with a timeout of 10 seconds
-			            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+			            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 			            // Wait for the login button to be clickable (enabled)
 			            WebElement enabledEnterReceiptButton = wait.until(ExpectedConditions.elementToBeClickable(enterReceiptDetailsButton));
@@ -252,7 +316,7 @@ public WebDriver driver;
 			    	
 				 try {
 						// Create an instance of WebDriverWait with a timeout of 10 seconds
-				        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+				        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 				        // Wait for the URL to change to the expected URL
 				        WebElement pageLoaded = wait.until(ExpectedConditions.visibilityOf(navigatedFromMemberDetailsToLocation));
@@ -325,7 +389,7 @@ public WebDriver driver;
 			    	
 				 try {
 			            // Create an instance of WebDriverWait with a timeout of 10 seconds
-			            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+			            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 			            // Wait for the hamburger icon to be clickable
 			            WebElement hamburgerIcon = wait.until(ExpectedConditions.elementToBeClickable(hamburgerIconMemberOnMemberDetailsPage));
@@ -344,7 +408,7 @@ public WebDriver driver;
 			    
 			    	try {
 			            // Create an instance of WebDriverWait with a timeout of 10 seconds
-			            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+			            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 			            // Wait for the hamburger icon to be clickable
 			            WebElement hamburgerIcon = wait.until(ExpectedConditions.elementToBeClickable(hamburgerIconMemberLookupOption));
@@ -364,7 +428,7 @@ public WebDriver driver;
 			    	
 			    	try {
 			            // Create an instance of WebDriverWait with a timeout of 10 seconds
-			            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+			            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 			            // Wait for the hamburger icon to be clickable
 			            WebElement hamburgerIcon = wait.until(ExpectedConditions.elementToBeClickable(hamburgerIconLocationOption));
@@ -383,7 +447,7 @@ public WebDriver driver;
 			    	
 			    	try {
 			            // Create an instance of WebDriverWait with a timeout of 10 seconds
-			            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+			            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 			            // Wait for the hamburger icon to be clickable
 			            WebElement hamburgerIcon = wait.until(ExpectedConditions.elementToBeClickable(hamburgerLanguagePreference));
@@ -403,7 +467,7 @@ public WebDriver driver;
 			    	
 			    	try {
 			            // Create an instance of WebDriverWait with a timeout of 10 seconds
-			            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+			            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 			            // Wait for the hamburger icon to be clickable
 			            WebElement hamburgerIcon = wait.until(ExpectedConditions.elementToBeClickable(chooseJapaneseLanguage));
@@ -455,7 +519,7 @@ public WebDriver driver;
 					
 					try {
 			            // Create an instance of WebDriverWait with a timeout of 10 seconds
-			            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+			            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 			            // Wait for the hamburger icon to be clickable
 			            WebElement hamburgerIcon = wait.until(ExpectedConditions.elementToBeClickable(logoutFromMemberDetailsScreen));
@@ -472,7 +536,7 @@ public WebDriver driver;
 			    public void clickOnBackButton() {
 			    	try {
 			            // Create an instance of WebDriverWait with a timeout of 10 seconds
-			            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+			            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 			            // Wait for the hamburger icon to be clickable
 			            WebElement hamburgerIcon = wait.until(ExpectedConditions.elementToBeClickable(backButton));
@@ -490,7 +554,7 @@ public WebDriver driver;
 			    public void verifySuccessfullNavigationForBackButton(WebDriver driver) {
 			    	try {
 						// Create an instance of WebDriverWait with a timeout of 10 seconds
-				        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+				        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 				        // Wait for the URL to change to the expected URL: navigatedFromMemberLookupToMemeberLookup
 				        WebElement pageLoaded = wait.until(ExpectedConditions.visibilityOf(navigatedFromMemberDetailsToMemeberLookup));
@@ -513,7 +577,7 @@ public WebDriver driver;
 			    public void verifySuccessfullNavigationFromMemberDetailsToMemberLookupScreen(WebDriver driver) {
 			    	try {
 						// Create an instance of WebDriverWait with a timeout of 10 seconds
-				        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+				        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 				        // Wait for the URL to change to the expected URL: navigatedFromMemberLookupToMemeberLookup
 				        WebElement pageLoaded = wait.until(ExpectedConditions.visibilityOf(navigatedFromMemberDetailsToMemeberLookup));
@@ -535,7 +599,7 @@ public WebDriver driver;
 			    public void verifySuccessfullNavigationFromMemberDetailsToLocationScreen(WebDriver driver) {
 			    	try {
 						// Create an instance of WebDriverWait with a timeout of 10 seconds
-				        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+				        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 				        // Wait for the URL to change to the expected URL//navigatedFromMemberLookupToLocation
 				        WebElement pageLoaded = wait.until(ExpectedConditions.visibilityOf(navigatedFromMemberDetailsToLocation));
@@ -557,7 +621,7 @@ public WebDriver driver;
 				    	
 							try {
 								// Create an instance of WebDriverWait with a timeout of 10 seconds
-						        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+						        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 						        // Wait for the URL to change to the expected URL
 						        WebElement pageLoaded = wait.until(ExpectedConditions.visibilityOf(naviagtedToLoginPage));

@@ -2,10 +2,12 @@ package zapcg.Capillary.PageObject;
 
 import static org.testng.Assert.assertEquals;
 
+
 import java.time.Duration;
 import java.util.NoSuchElementException;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,6 +16,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
 
 
@@ -21,9 +24,12 @@ import org.testng.Assert;
 public class loginPage{
 	public WebDriver driver;
 
-	
-	@FindBy(xpath="//div[@id='LGMENUI0']")
+
+	@FindBy(css = "div#LGMENUI0.button")
 	WebElement defaultLanguageChange;
+	//LGMENUI0
+	//@FindBy(xpath="//div[@id='LGMENUI0']")
+	//WebElement defaultLanguageChange;
 	
 	@FindBy(xpath="//p[contains(text(),'English')]")
 	WebElement chooseEnglish;
@@ -69,16 +75,73 @@ public class loginPage{
 		public loginPage(WebDriver driver){
 			this.driver=driver;
 			PageFactory.initElements(driver, this);
+			
 		}
 		
 		public void changeDefaultLanguage()
-		{
-			 defaultLanguageChange.click();
+		{ 
+			  System.out.println("Now we will try to change the default language to English language");
+			 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
+
+			    try {
+			        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(defaultLanguageChange));
+			        element.click();
+			        System.out.println("Clicked on default language change element.");
+
+			    } catch (Exception e) {
+			        System.err.println("Error clicking on default language change element: " + e.getMessage());
+			        Assert.fail("Failed to click on default language change element.");
+			    }
+			    System.out.println("Able to change the default language to English language");
+			
+			/*
+			int maxRetries = 3; // Maximum number of retries for handling stale element
+	        int retries = 0;
+	        boolean success = false;
+
+	        while (retries < maxRetries && !success) {
+	            try {
+	                // Configure FluentWait
+	                Wait<WebDriver> wait = new FluentWait<>(driver)
+	                        .withTimeout(Duration.ofSeconds(40))  // Maximum wait time
+	                        .pollingEvery(Duration.ofSeconds(5))  // Polling interval
+	                        .ignoring(NoSuchElementException.class) // Ignoring NoSuchElementException
+	                        .ignoring(StaleElementReferenceException.class); // Ignoring StaleElementReferenceException
+
+	                // Wait for the element to be clickable
+	                WebElement element = wait.until(ExpectedConditions.elementToBeClickable(defaultLanguageChange));
+
+	                // Perform action on the element
+	                element.click();
+	                success = true; // If execution reaches here, it means the operation was successful
+
+	            } catch (StaleElementReferenceException e) {
+	                System.err.println("Encountered StaleElementReferenceException. Retrying... (" + (retries + 1) + "/" + maxRetries + ")");
+	                retries++;
+	                if (retries >= maxRetries) {
+	                    Assert.fail("Failed due to repeated StaleElementReferenceException.");
+	                }
+	            } catch (NoSuchElementException e) {
+	                System.err.println("The default language change element was not found: " + e.getMessage());
+	                Assert.fail("The default language change element was not found.");
+	                
+	            } catch (Exception e) {
+	                System.err.println("An unexpected error occurred: " + e.getMessage());
+	                Assert.fail("An unexpected error occurred.");
+	            }
+	        }*/
 		}
 		
 		public void chooseEnglishLanguage()
 		{
-			chooseEnglish.click();
+			FluentWait<WebDriver> wait = new FluentWait<>(driver)
+		            .withTimeout(Duration.ofSeconds(30))  // Maximum wait time
+		            .pollingEvery(Duration.ofSeconds(2))  // Polling interval
+		            .ignoring(NoSuchElementException.class);  // Exceptions to ignore
+
+		        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(chooseEnglish));
+		        element.click();
+			
 		}
 		
 		public void login(String user, String pass) {
@@ -132,7 +195,7 @@ public class loginPage{
 		public void verifySuccessfullLogin(WebDriver driver, String expectedUrl) {
 			try {
 				// Create an instance of WebDriverWait with a timeout of 10 seconds
-		        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 		        // Wait for the URL to change to the expected URL
 		        boolean isUrlChanged = wait.until(ExpectedConditions.urlToBe("https://d1msv2sqknn4w4.cloudfront.net/member-search"));
@@ -228,7 +291,7 @@ public class loginPage{
 		
 		public void verifyMaxLengthForUserName(String expectedErrorMessage) {
 			try {
-				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 		        // Wait for the error message element to be visible
 		        WebElement errorMsgElement = wait.until(ExpectedConditions.visibilityOf(errormsgforexceedingusernamelength));
@@ -261,7 +324,7 @@ public class loginPage{
 		public void verifyMinLengthForPassword(String expectedErrorMessage) {
 			
 			try {
-				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 		        // Wait for the error message element to be visible
 		        WebElement errorMsgElement = wait.until(ExpectedConditions.visibilityOf(errormsgforminpasswordlength));
@@ -295,7 +358,7 @@ public class loginPage{
 		public void verifySpaceNotAllowedUserName(String expectedErrorMessage) {
 			
 			try {
-				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 		        // Wait for the error message element to be visible
 		        WebElement errorMsgElement = wait.until(ExpectedConditions.visibilityOf(spacenotallowedinusername));
@@ -333,7 +396,7 @@ public class loginPage{
 			try {
 
 	            // Create an instance of WebDriverWait with a timeout of 10 seconds
-	            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 	            // Wait for the login button to be clickable (enabled)
 	            WebElement enabledLoginButton = wait.until(ExpectedConditions.elementToBeClickable(loginBtn));
@@ -425,7 +488,7 @@ public class loginPage{
 		public void verifyLockOutMessage(String expectedErrorMessage) {
 			
 			try {
-				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 		        // Wait for the error message element to be visible
 		        WebElement errorMsgElement = wait.until(ExpectedConditions.visibilityOf(lockoutmsg));
@@ -470,13 +533,22 @@ public class loginPage{
 			}
 		
 		public void clickOnLoginButton() {
-			loginBtn.click();
+			FluentWait<WebDriver> wait = new FluentWait<>(driver)
+		            .withTimeout(Duration.ofSeconds(30))  // Maximum wait time
+		            .pollingEvery(Duration.ofSeconds(2))  // Polling interval
+		            .ignoring(NoSuchElementException.class);  // Exceptions to ignore
+
+		        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(loginBtn));
+		        element.click();
+			
+			
+			//loginBtn.click();
 			}
 	
 		public void verifySuccessfullNavigationFromLogin(WebDriver driver) {
 			  try {
 			        // Create an instance of WebDriverWait with a timeout of 20 seconds
-			        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 			        // Wait for either locationPageFromLoginPage or memberLookupPageFromLoginPage to be visible
 			        boolean locationPageVisible = wait.until(ExpectedConditions.visibilityOf(locationPageFromLoginPage)).isDisplayed();

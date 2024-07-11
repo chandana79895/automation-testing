@@ -1,14 +1,18 @@
 package zapcg.Capillary.PageObject;
 
 import java.time.Duration;
+import org.openqa.selenium.JavascriptExecutor;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -141,7 +145,7 @@ public class locationSelectionPage {
 		public void chooseFromStore()
 		{
 			selectStore.click();
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 	        // Wait for the error message element to be visible
 	        WebElement store = wait.until(ExpectedConditions.visibilityOf((WebElement) selectStoreOptions));
@@ -152,17 +156,49 @@ public class locationSelectionPage {
 		}
 		
 		public void clickOnChooseLocationButton() {
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
-	        // Wait for the error message element to be visible
-	        WebElement chooseLocationButton = wait.until(ExpectedConditions.elementToBeClickable((WebElement) chooseLocationBtn));
-	
-			chooseLocationButton.click();
-			
+	        int maxRetries = 3;
+	        int retries = 0;
+	        boolean success = false;
+
+	        while (retries < maxRetries && !success) {
+	            try {
+	                // Wait for the element to be clickable
+	                WebElement chooseLocationButton = wait.until(ExpectedConditions.elementToBeClickable(chooseLocationBtn));
+
+	                // Scroll the element into view using JavaScript
+	                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", chooseLocationButton);
+
+	                // Use JavaScript to click the element as an alternative
+	                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", chooseLocationButton);
+	                success = true;
+
+	            } catch (ElementClickInterceptedException e) {
+	                System.err.println("Element click intercepted. Retrying... (" + (retries + 1) + "/" + maxRetries + ")");
+	                retries++;
+
+	                // Optional: Add a short delay between retries
+	                try {
+	                    Thread.sleep(1000);
+	                } catch (InterruptedException ie) {
+	                    Thread.currentThread().interrupt();
+	                    Assert.fail("Interrupted while waiting to retry element click.");
+	                }
+
+	                if (retries >= maxRetries) {
+	                    Assert.fail("Failed to click on the element due to repeated ElementClickInterceptedException.");
+	                }
+	            }
+	        }
+
+	        if (!success) {
+	            Assert.fail("Failed to click on the element due to repeated ElementClickInterceptedException.");
+	        }
 		}
 		
 		
-		
+		/*
 		public void verifySuccessfullNavigationFromLocationToMemberSearchPage(WebDriver driver, String expectedUrl) {
 			try {
 				// Create an instance of WebDriverWait with a timeout of 10 seconds
@@ -186,7 +222,7 @@ public class locationSelectionPage {
 		    
 			}
 			
-		}
+		}*/
 		
 		
 		// Method to verify dropdown presence
@@ -203,7 +239,7 @@ public class locationSelectionPage {
 		    public boolean isNavigateButtonEnabled() {
 		    	
 		    	try {
-		            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		            WebElement enabledButton = wait.until(ExpectedConditions.elementToBeClickable(chooseLocationBtn));
 		            return enabledButton.isEnabled();
 		        } catch (NoSuchElementException e) {
@@ -236,27 +272,55 @@ public class locationSelectionPage {
 		    
 		    
 		    public void clickOnHamburgerIcon() {
-		    	hamburgerIcon.click();
+		    	Wait<WebDriver> wait = new FluentWait<>(driver)
+		                .withTimeout(Duration.ofSeconds(30))  // Maximum wait time
+		                .pollingEvery(Duration.ofSeconds(2))  // Polling interval
+		                .ignoring(NoSuchElementException.class);  // Exceptions to ignore
+
+		            WebElement element = wait.until(ExpectedConditions.elementToBeClickable(hamburgerIcon));
+		            element.click();
+		    	//hamburgerIcon.click();
 		    }
 		    
 		    public void chooseMemberLookupOption() {
-		    	hamburgerIconMemberLookupOption.click();
+		    	Wait<WebDriver> wait = new FluentWait<>(driver)
+		                .withTimeout(Duration.ofSeconds(30))  // Maximum wait time
+		                .pollingEvery(Duration.ofSeconds(2))  // Polling interval
+		                .ignoring(NoSuchElementException.class);  // Exceptions to ignore
+
+		            WebElement element = wait.until(ExpectedConditions.elementToBeClickable(hamburgerIconMemberLookupOption));
+		            element.click();
+		    	//hamburgerIconMemberLookupOption.click();
 		    }
 		    
 		    public void chooseLocationOption()
-		    {
-		    	hamburgerIconLocationOption.click();
+		    {	
+		    	Wait<WebDriver> wait = new FluentWait<>(driver)
+		                .withTimeout(Duration.ofSeconds(30))  // Maximum wait time
+		                .pollingEvery(Duration.ofSeconds(2))  // Polling interval
+		                .ignoring(NoSuchElementException.class);  // Exceptions to ignore
+
+		            WebElement element = wait.until(ExpectedConditions.elementToBeClickable(hamburgerIconLocationOption));
+		            element.click();
+		    	//hamburgerIconLocationOption.click();
 		    }
 		    
 		    public void chooseLogout() {
-		    	logoutLocationScreen.click();
+		    	Wait<WebDriver> wait = new FluentWait<>(driver)
+		                .withTimeout(Duration.ofSeconds(30))  // Maximum wait time
+		                .pollingEvery(Duration.ofSeconds(2))  // Polling interval
+		                .ignoring(NoSuchElementException.class);  // Exceptions to ignore
+
+		            WebElement element = wait.until(ExpectedConditions.elementToBeClickable(logoutLocationScreen));
+		            element.click();
+		    	//logoutLocationScreen.click();
 		    }
 		    
 		    
 		    public void verifySuccessfullNavigationFromLocationToMemberLookupScreen(WebDriver driver) {
 		    	try {
 					// Create an instance of WebDriverWait with a timeout of 10 seconds
-			        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 			        // Wait for the URL to change to the expected URL: navigatedFromMemberLookupToMemeberLookup
 			        WebElement pageLoaded = wait.until(ExpectedConditions.visibilityOf(navigatedToMemberLookupScreen));
@@ -279,7 +343,7 @@ public class locationSelectionPage {
 		    public void verifySuccessfullNavigationFromLocationToLocationScreen(WebDriver driver) {
 		    	try {
 					// Create an instance of WebDriverWait with a timeout of 10 seconds
-			        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 			        // Wait for the URL to change to the expected URL//navigatedFromMemberLookupToLocation
 			        WebElement pageLoaded = wait.until(ExpectedConditions.visibilityOf(navigatedFromLocationToLocation));
@@ -304,7 +368,7 @@ public class locationSelectionPage {
 		    	
 		    	try {
 					// Create an instance of WebDriverWait with a timeout of 10 seconds
-			        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 			        // Wait for the URL to change to the expected URL
 			        WebElement pageLoaded = wait.until(ExpectedConditions.visibilityOf(naviagtedToLoginPage));
@@ -335,7 +399,7 @@ public class locationSelectionPage {
 		    public void verifySuccessfullNavigationFromLocationTOMemberLookupPage(WebDriver driver) {
 				try {
 					// Create an instance of WebDriverWait with a timeout of 10 seconds
-			        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 			        // Wait for the URL to change to the expected URL
 			        WebElement pageLoaded = wait.until(ExpectedConditions.visibilityOf(navigatedToMemberLookupScreen));

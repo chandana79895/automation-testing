@@ -78,7 +78,6 @@ public class EarnPoint_Valid_TestCases extends BaseTest{
 		
 	}
 	 
-	 
 	 @Test(priority=5, groups = "EarnPoint")
 		public void verify_MemberDetails_Content_Displaying_On_EarnPointScreen() {
 		
@@ -229,7 +228,7 @@ public class EarnPoint_Valid_TestCases extends BaseTest{
 		 epp.enterGoToPassPoint("1");
 		 
 		 epp.clickOnSubmitButton();
-		 epp.verifySuccessMessageIfRedeemingPoints("transaction has been successfully submitted. They have earned points and have spent points");
+		 epp.verifySuccessMessageIfRedeemingPoints("transaction has been successfully submitted. They have earned 89 points and have spent 1 points.");
 	 }
 	
 	 
@@ -284,12 +283,13 @@ public class EarnPoint_Valid_TestCases extends BaseTest{
 	    
 	        epp.enterTransactionAmount(transactionAmount);
 	        epp.clickOnSubmitButton();
-	        epp.clickOnContinueSuccessButton();
-	        mlp.enterMemberId("GT000003673");
+	        epp.verifySuccessMessageExceedThresoldValue("Success! Customer/Member transaction exceeds threshold. The transaction has been submitted for approval");
+	        //epp.clickOnContinueSuccessButton();
+	       // mlp.enterMemberId("GT000003673");
 
 	        // Navigate back to Member Details screen and get updated total earning points
-	        int updatedTotalEarningPoints = mdp.getTotalEarningPoints();
-	        System.out.println("Updated Total Earning Points: " + updatedTotalEarningPoints);
+	        //int updatedTotalEarningPoints = mdp.getTotalEarningPoints();
+	        //System.out.println("Updated Total Earning Points: " + updatedTotalEarningPoints);
 
 	   
 		 

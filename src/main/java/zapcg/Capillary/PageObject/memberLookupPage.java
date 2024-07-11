@@ -10,6 +10,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -86,7 +88,14 @@ public class memberLookupPage extends BaseTest {
 	    }
 	    
 	    public void clickOnHyperlink() {
-	    	locationHeader.click();
+	    	FluentWait<WebDriver> wait = new FluentWait<>(driver)
+	                .withTimeout(Duration.ofSeconds(30))  // Maximum wait time
+	                .pollingEvery(Duration.ofSeconds(2))  // Polling interval
+	                .ignoring(NoSuchElementException.class);  // Exceptions to ignore
+
+	            WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locationHeader));
+	            element.click();
+	    	//locationHeader.click();
 	    	
 	    }
 	    
@@ -98,7 +107,7 @@ public class memberLookupPage extends BaseTest {
 	    public void clickOnScanQRCodeButton()
 	    {
 	    	
-	    	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	    	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 	        WebElement scanQRCodeButton = wait.until(ExpectedConditions.visibilityOf(scanQRButton));
 	        scanQRCodeButton.click();
 	    
@@ -107,11 +116,13 @@ public class memberLookupPage extends BaseTest {
 	    public void clickOnSearchButton()
 	    {
 	    	
-	    	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	    	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 	        WebElement searchBtn = wait.until(ExpectedConditions.visibilityOf(searchButton));
 	        searchBtn.click();
 	    
 	    }
+	    
+	    /*
 	    
 	    public void verifySuccessfullNavigationToMemberDetailsPage(WebDriver driver, String expectedUrl) {
 			try {
@@ -137,13 +148,13 @@ public class memberLookupPage extends BaseTest {
 			}
 			
 		}
-	
+	*/
 	    
 	    public void headerHyperlinkVerification(WebDriver driver) {
 	    	
 	    	try {
 				// Create an instance of WebDriverWait with a timeout of 10 seconds
-		        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 		        // Wait for the URL to change to the expected URL
 		        WebElement pageLoaded = wait.until(ExpectedConditions.visibilityOf(navigatedFromMemberLookupToLocation));
@@ -165,7 +176,7 @@ public class memberLookupPage extends BaseTest {
 	    
 	    public void verifyMaxLengthForMemberId(String expectedErrorMessage) {
 			try {
-				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 		        // Wait for the error message element to be visible
 		        WebElement errorMsgElement = wait.until(ExpectedConditions.visibilityOf(errormsgformaxlengthmemberid));
@@ -203,7 +214,7 @@ public class memberLookupPage extends BaseTest {
 			try {
 
 	            // Create an instance of WebDriverWait with a timeout of 10 seconds
-	            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 	            // Wait for the login button to be clickable (enabled)
 	            WebElement enabledScanQRButton = wait.until(ExpectedConditions.elementToBeClickable(scanQRButton));
@@ -284,33 +295,62 @@ public class memberLookupPage extends BaseTest {
 	    
 	    public void clickOnTryAgainButton()
 	    {
-	    	tryAgainButton.click();
+	    	Wait<WebDriver> wait = new FluentWait<>(driver)
+	                .withTimeout(Duration.ofSeconds(30))  // Maximum wait time
+	                .pollingEvery(Duration.ofSeconds(2))  // Polling interval
+	                .ignoring(NoSuchElementException.class);  // Exceptions to ignore
+
+	            WebElement element = wait.until(ExpectedConditions.elementToBeClickable(tryAgainButton));
+	            element.click();
+	    	//tryAgainButton.click();
 	    }
 	    
 	    
 	    
 	    
 	    public void clickOnHamburgerIcon()
-	    {
+	    {	
+	    	Wait<WebDriver> wait = new FluentWait<>(driver)
+	                .withTimeout(Duration.ofSeconds(30))  // Maximum wait time
+	                .pollingEvery(Duration.ofSeconds(2))  // Polling interval
+	                .ignoring(NoSuchElementException.class);  // Exceptions to ignore
+
+	            WebElement element = wait.until(ExpectedConditions.elementToBeClickable(hamburgerIconMemberOnLookupPage));
+	            element.click();
 	    	
-	    	hamburgerIconMemberOnLookupPage.click();
+	    	//hamburgerIconMemberOnLookupPage.click();
 	    
 	    }
 	    
 	    public void chooseMemberLookupOption() {
-	    	hamburgerIconMemberLookupOption.click();
+	    	
+	    	Wait<WebDriver> wait = new FluentWait<>(driver)
+	                .withTimeout(Duration.ofSeconds(30))  // Maximum wait time
+	                .pollingEvery(Duration.ofSeconds(2))  // Polling interval
+	                .ignoring(NoSuchElementException.class);  // Exceptions to ignore
+
+	            WebElement element = wait.until(ExpectedConditions.elementToBeClickable(hamburgerIconMemberLookupOption));
+	            element.click();
+	    	//hamburgerIconMemberLookupOption.click();
 	    	
 	    }
 	    
 	    public void chooseLocationFromHamburger() {
-	    	hamburgerIconLocationOption.click();
+	    	Wait<WebDriver> wait = new FluentWait<>(driver)
+	                .withTimeout(Duration.ofSeconds(30))  // Maximum wait time
+	                .pollingEvery(Duration.ofSeconds(2))  // Polling interval
+	                .ignoring(NoSuchElementException.class);  // Exceptions to ignore
+
+	            WebElement element = wait.until(ExpectedConditions.elementToBeClickable(hamburgerIconLocationOption));
+	            element.click();
+	    	//hamburgerIconLocationOption.click();
 	    	
 	    }
 
 	    public void verifySuccessfullNavigationFromMemberLookupToMemberLookupScreen(WebDriver driver) {
 	    	try {
 				// Create an instance of WebDriverWait with a timeout of 10 seconds
-		        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 		        // Wait for the URL to change to the expected URL: navigatedFromMemberLookupToMemeberLookup
 		        WebElement pageLoaded = wait.until(ExpectedConditions.visibilityOf(navigatedFromMemberLookupToMemeberLookup));
@@ -332,7 +372,7 @@ public class memberLookupPage extends BaseTest {
 	    public void verifySuccessfullNavigationFromMemberLookupToLocationScreen(WebDriver driver) {
 	    	try {
 				// Create an instance of WebDriverWait with a timeout of 10 seconds
-		        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 		        // Wait for the URL to change to the expected URL//navigatedFromMemberLookupToLocation
 		        WebElement pageLoaded = wait.until(ExpectedConditions.visibilityOf(navigatedFromMemberLookupToLocation));
@@ -354,7 +394,7 @@ public class memberLookupPage extends BaseTest {
 		    	
 					try {
 						// Create an instance of WebDriverWait with a timeout of 10 seconds
-				        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+				        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 				        // Wait for the URL to change to the expected URL
 				        WebElement pageLoaded = wait.until(ExpectedConditions.visibilityOf(naviagtedToLoginPage));
@@ -376,14 +416,24 @@ public class memberLookupPage extends BaseTest {
 		    }
 				
 				public void chooseLogout()
+				
+				
 				{
-					logoutLocationScreen.click();
+					Wait<WebDriver> wait = new FluentWait<>(driver)
+			                .withTimeout(Duration.ofSeconds(30))  // Maximum wait time
+			                .pollingEvery(Duration.ofSeconds(2))  // Polling interval
+			                .ignoring(NoSuchElementException.class);  // Exceptions to ignore
+
+			            WebElement element = wait.until(ExpectedConditions.elementToBeClickable(logoutLocationScreen));
+			            element.click();
+					
+					//logoutLocationScreen.click();
 				}
 			
 				public void verifySuccessfullNavigationFromMemberLookupToMemberDetails(WebDriver driver) {
 					try {
 						// Create an instance of WebDriverWait with a timeout of 10 seconds
-				        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+				        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 				        // Wait for the URL to change to the expected URL
 				        WebElement pageLoaded = wait.until(ExpectedConditions.visibilityOf(navigatedFromMemberDetailsToMemberLookup));

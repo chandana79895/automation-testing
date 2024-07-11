@@ -14,7 +14,7 @@ import zapcg.Capillary.PageObject.memberLookupPage;
 
 
 public class Location_ExistingUser_TestCases extends BaseTest{
-	public loginPage lp;
+	public loginPage lp=new loginPage(driver);
 	public String currentBrowser;
 	public locationSelectionPage locp;
 	public memberLookupPage mlp;
@@ -41,7 +41,7 @@ public class Location_ExistingUser_TestCases extends BaseTest{
 			}
                 
           
-                @Test(priority = 1, groups = "Location")
+                @Test(priority = 11, groups = "Location")
                 public void choose_ValidLocation_For_NewUser() throws InterruptedException {
                 	
                     locationSelectionPage locp = new locationSelectionPage(driver);
@@ -55,13 +55,12 @@ public class Location_ExistingUser_TestCases extends BaseTest{
             
                    // locp.clickNavigateButton();
                     locp.verifySuccessfullNavigationFromLocationTOMemberLookupPage(driver);
-                    //locp.verifySuccessfullNavigationFromLocationToMemberSearchPage(driver, "https://d1msv2sqknn4w4.cloudfront.net/member-search");
                     System.out.println("The functionality of location screen working properly");
                     
             		}
                 
                 
-                @Test(priority = 2, groups = "Location")
+                @Test(priority = 12, groups = "Location")
                 public void verify_DropDown_Availability() throws InterruptedException {
                 	
                 	locationSelectionPage locp = new locationSelectionPage(driver);

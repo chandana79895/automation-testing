@@ -11,7 +11,7 @@
     <parameter name="browser" value="chrome"/>
     <parameter name="deviceName" value="Tablet Portrait"/> <!-- Tablet Portrait -->
  
-    
+   
     <classes>
       <class name="zapcg.Capillary.LoginTestCases.Login_Valid_TestCases"/>
       <class name="zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases"/>
@@ -22,6 +22,7 @@
       <class name="zapcg.Capillary.EarnPointPageTestCases.EarnPoint_Valid_TestCases"/>
       <class name="zapcg.Capillary.EarnPointPageTestCases.EarnPoint_Invalid_TestCases"/>
       <class name="zapcg.Capillary.EarnPointPageTestCases.GoToPassPointMoreThanAvailablePoint"/>
+      
       
       
     </classes>

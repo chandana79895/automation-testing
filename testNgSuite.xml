@@ -40,7 +40,7 @@
       <class name="zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases"/>
       <class name="zapcg.Capillary.LocationPageTestCases.Location_ExistingUser_TestCases"/>
       <class name="zapcg.Capillary.MemberDetailsTestCases.memberDetails_TestCases"/>
-      <class name="zapcg.Capillary.MemberLookupTestCases.MemberLookup_TestCases"/>
+      <class name="zapcg.Capillary.MemberLookupTestCases.MemberLookup_Valid_TestCases"/>
       <class name="zapcg.Capillary.MemberLookupTestCases.memberLookup_Invalid_TestCases"/>
       <class name="zapcg.Capillary.EarnPointPageTestCases.EarnPoint_Valid_TestCases"/>
       <class name="zapcg.Capillary.EarnPointPageTestCases.EarnPoint_Invalid_TestCases"/>
@@ -58,7 +58,7 @@
       <class name="zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases"/>
       <class name="zapcg.Capillary.LocationPageTestCases.Location_ExistingUser_TestCases"/>
       <class name="zapcg.Capillary.MemberDetailsTestCases.memberDetails_TestCases"/>
-      <class name="zapcg.Capillary.MemberLookupTestCases.MemberLookup_TestCases"/>
+      <class name="zapcg.Capillary.MemberLookupTestCases.MemberLookup_Valid_TestCases"/>
       <class name="zapcg.Capillary.MemberLookupTestCases.memberLookup_Invalid_TestCases"/>
       <class name="zapcg.Capillary.EarnPointPageTestCases.EarnPoint_Valid_TestCases"/>
       <class name="zapcg.Capillary.EarnPointPageTestCases.EarnPoint_Invalid_TestCases"/>
@@ -77,7 +77,7 @@
       <class name="zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases"/>
       <class name="zapcg.Capillary.LocationPageTestCases.Location_ExistingUser_TestCases"/>
       <class name="zapcg.Capillary.MemberDetailsTestCases.memberDetails_TestCases"/>
-      <class name="zapcg.Capillary.MemberLookupTestCases.MemberLookup_TestCases"/>
+      <class name="zapcg.Capillary.MemberLookupTestCases.MemberLookup_Valid_TestCases"/>
       <class name="zapcg.Capillary.MemberLookupTestCases.memberLookup_Invalid_TestCases"/>
       <class name="zapcg.Capillary.EarnPointPageTestCases.EarnPoint_Valid_TestCases"/>
       <class name="zapcg.Capillary.EarnPointPageTestCases.EarnPoint_Invalid_TestCases"/>
@@ -96,7 +96,7 @@
       <class name="zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases"/>
       <class name="zapcg.Capillary.LocationPageTestCases.Location_ExistingUser_TestCases"/>
       <class name="zapcg.Capillary.MemberDetailsTestCases.memberDetails_TestCases"/>
-      <class name="zapcg.Capillary.MemberLookupTestCases.MemberLookup_TestCases"/>
+      <class name="zapcg.Capillary.MemberLookupTestCases.MemberLookup_Valid_TestCases"/>
       <class name="zapcg.Capillary.MemberLookupTestCases.memberLookup_Invalid_TestCases"/>
       <class name="zapcg.Capillary.EarnPointPageTestCases.EarnPoint_Valid_TestCases"/>
       <class name="zapcg.Capillary.EarnPointPageTestCases.EarnPoint_Invalid_TestCases"/>
@@ -116,7 +116,7 @@
       <class name="zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases"/>
       <class name="zapcg.Capillary.LocationPageTestCases.Location_ExistingUser_TestCases"/>
       <class name="zapcg.Capillary.MemberDetailsTestCases.memberDetails_TestCases"/>
-      <class name="zapcg.Capillary.MemberLookupTestCases.MemberLookup_TestCases"/>
+      <class name="zapcg.Capillary.MemberLookupTestCases.MemberLookup_Valid_TestCases"/>
       <class name="zapcg.Capillary.MemberLookupTestCases.memberLookup_Invalid_TestCases"/>
       <class name="zapcg.Capillary.EarnPointPageTestCases.EarnPoint_Valid_TestCases"/>
       <class name="zapcg.Capillary.EarnPointPageTestCases.EarnPoint_Invalid_TestCases"/>
@@ -140,7 +140,7 @@
       <class name="zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases"/>
       <class name="zapcg.Capillary.LocationPageTestCases.Location_ExistingUser_TestCases"/>
       <class name="zapcg.Capillary.MemberDetailsTestCases.memberDetails_TestCases"/>
-      <class name="zapcg.Capillary.MemberLookupTestCases.MemberLookup_TestCases"/>
+      <class name="zapcg.Capillary.MemberLookupTestCases.MemberLookup_Valid_TestCases"/>
       <class name="zapcg.Capillary.MemberLookupTestCases.memberLookup_Invalid_TestCases"/>
       <class name="zapcg.Capillary.EarnPointPageTestCases.EarnPoint_Valid_TestCases"/>
       <class name="zapcg.Capillary.EarnPointPageTestCases.EarnPoint_Invalid_TestCases"/>
@@ -161,7 +161,7 @@
       <class name="zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases"/>
       <class name="zapcg.Capillary.LocationPageTestCases.Location_ExistingUser_TestCases"/>
       <class name="zapcg.Capillary.MemberDetailsTestCases.memberDetails_TestCases"/>
-      <class name="zapcg.Capillary.MemberLookupTestCases.MemberLookup_TestCases"/>
+      <class name="zapcg.Capillary.MemberLookupTestCases.MemberLookup_Valid_TestCases"/>
       <class name="zapcg.Capillary.MemberLookupTestCases.memberLookup_Invalid_TestCases"/>
       <class name="zapcg.Capillary.EarnPointPageTestCases.EarnPoint_Valid_TestCases"/>
       <class name="zapcg.Capillary.EarnPointPageTestCases.EarnPoint_Invalid_TestCases"/>
@@ -179,7 +179,7 @@
       <class name="zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases"/>
       <class name="zapcg.Capillary.LocationPageTestCases.Location_ExistingUser_TestCases"/>
       <class name="zapcg.Capillary.MemberDetailsTestCases.memberDetails_TestCases"/>
-      <class name="zapcg.Capillary.MemberLookupTestCases.MemberLookup_TestCases"/>
+      <class name="zapcg.Capillary.MemberLookupTestCases.MemberLookup_Valid_TestCases"/>
       <class name="zapcg.Capillary.MemberLookupTestCases.memberLookup_Invalid_TestCases"/>
       <class name="zapcg.Capillary.EarnPointPageTestCases.EarnPoint_Valid_TestCases"/>
       <class name="zapcg.Capillary.EarnPointPageTestCases.EarnPoint_Invalid_TestCases"/>
@@ -198,7 +198,7 @@
       <class name="zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases"/>
       <class name="zapcg.Capillary.LocationPageTestCases.Location_ExistingUser_TestCases"/>
       <class name="zapcg.Capillary.MemberDetailsTestCases.memberDetails_TestCases"/>
-      <class name="zapcg.Capillary.MemberLookupTestCases.MemberLookup_TestCases"/>
+      <class name="zapcg.Capillary.MemberLookupTestCases.MemberLookup_Valid_TestCases"/>
       <class name="zapcg.Capillary.MemberLookupTestCases.memberLookup_Invalid_TestCases"/>
       <class name="zapcg.Capillary.EarnPointPageTestCases.EarnPoint_Valid_TestCases"/>
       <class name="zapcg.Capillary.EarnPointPageTestCases.EarnPoint_Invalid_TestCases"/>
@@ -217,7 +217,7 @@
       <class name="zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases"/>
       <class name="zapcg.Capillary.LocationPageTestCases.Location_ExistingUser_TestCases"/>
       <class name="zapcg.Capillary.MemberDetailsTestCases.memberDetails_TestCases"/>
-      <class name="zapcg.Capillary.MemberLookupTestCases.MemberLookup_TestCases"/>
+      <class name="zapcg.Capillary.MemberLookupTestCases.MemberLookup_Valid_TestCases"/>
       <class name="zapcg.Capillary.MemberLookupTestCases.memberLookup_Invalid_TestCases"/>
       <class name="zapcg.Capillary.EarnPointPageTestCases.EarnPoint_Valid_TestCases"/>
       <class name="zapcg.Capillary.EarnPointPageTestCases.EarnPoint_Invalid_TestCases"/>
@@ -237,7 +237,7 @@
       <class name="zapcg.Capillary.LoginTestCases.Login_Invalid_TestCases"/>
       <class name="zapcg.Capillary.LocationPageTestCases.Location_ExistingUser_TestCases"/>
       <class name="zapcg.Capillary.MemberDetailsTestCases.memberDetails_TestCases"/>
-      <class name="zapcg.Capillary.MemberLookupTestCases.MemberLookup_TestCases"/>
+      <class name="zapcg.Capillary.MemberLookupTestCases.MemberLookup_Valid_TestCases"/>
       <class name="zapcg.Capillary.MemberLookupTestCases.memberLookup_Invalid_TestCases"/>
       <class name="zapcg.Capillary.EarnPointPageTestCases.EarnPoint_Valid_TestCases"/>
       <class name="zapcg.Capillary.EarnPointPageTestCases.EarnPoint_Invalid_TestCases"/>

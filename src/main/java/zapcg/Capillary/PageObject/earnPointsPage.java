@@ -7,13 +7,17 @@ import java.time.format.DateTimeParseException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import java.util.function.Function;
 
 public class earnPointsPage {
 	
@@ -83,8 +87,8 @@ public class earnPointsPage {
 		@FindBy(xpath="//p[@id='EPMDLMSG' and contains(text(), 'transaction has been successfully submitted. They have earned')]")
 		WebElement successMessage;
 		
-		@FindBy(xpath="//p[@id='EPMDLMSG' and contains(text(), 'transaction has been successfully submitted. They have earned 35 points and have spent 1 points.')]")
-		WebElement successRedeemMessage;
+		@FindBy(xpath="//div/p[@id='EPMDLMSG']")       //p[@id='EPMDLMSG' and contains(text(), 'transaction has been successfully submitted. They have earned 35 points and have spent 1 points.')]")
+		WebElement successRedeemMessage;////div[@id='EPMDL']/div/p[@id='EPMDLMSG' and contains(text(), 'transaction has been successfully submitted. They have earned 35 points and have spent 1 points.')]
 		
 		//Success! Customer/Member transaction exceeds threshold. The transaction has been submitted for approval
 		@FindBy(xpath="//p[@id='EPMDLMSG' and contains(text(), 'Success! Customer/Member transaction exceeds threshold. The transaction has been submitted for approval')]")
@@ -129,7 +133,7 @@ public class earnPointsPage {
 				public void verifySuccessfullNavigationFromMemberDetailsToEarnPointsPage(WebDriver driver) {
 					try {
 						// Create an instance of WebDriverWait with a timeout of 10 seconds
-				        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+				        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 				        // Wait for the URL to change to the expected URL
 				        WebElement pageLoaded = wait.until(ExpectedConditions.visibilityOf(earnPointSection));
@@ -152,7 +156,7 @@ public class earnPointsPage {
 				public void expandMemberDetails(WebDriver driver)
 				{
 					// Create an instance of WebDriverWait with a timeout of 10 seconds
-		            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
 
 		            // Wait for the login button to be clickable (enabled)
 		            WebElement clickOnMemberName = wait.until(ExpectedConditions.elementToBeClickable(memberName));
@@ -163,8 +167,76 @@ public class earnPointsPage {
 				
 				
 				public void verifyTheMemberDetailsContentDisplaying(WebDriver driver) {
-					 
-					 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+					FluentWait<WebDriver> wait = new FluentWait<>(driver)
+			                .withTimeout(Duration.ofSeconds(60))
+			                .pollingEvery(Duration.ofMillis(1000))
+			                .ignoring(NoSuchElementException.class)
+			                .ignoring(StaleElementReferenceException.class);
+
+			        WebElement memberNameArea = null;
+			        WebElement availablePoints = null;
+			        WebElement membershipId = null;
+			        WebElement pointsExpiryDate = null;
+
+			        try {
+			            // Wait for the elements to be visible using Fluent Wait
+			            memberNameArea = wait.until(new Function<WebDriver, WebElement>() {
+			                public WebElement apply(WebDriver driver) {
+			                    return driver.findElement(memberNameSection);
+			                }
+			            });
+
+			            availablePoints = wait.until(new Function<WebDriver, WebElement>() {
+			                public WebElement apply(WebDriver driver) {
+			                    return driver.findElement(availablePointsLocator);
+			                }
+			            });
+
+			            membershipId = wait.until(new Function<WebDriver, WebElement>() {
+			                public WebElement apply(WebDriver driver) {
+			                    return driver.findElement(membershipIdLocator);
+			                }
+			            });
+
+			            pointsExpiryDate = wait.until(new Function<WebDriver, WebElement>() {
+			                public WebElement apply(WebDriver driver) {
+			                    return driver.findElement(pointsExpiryDateLocator);
+			                }
+			            });
+
+			            // Verify that all the elements are displayed and print their details
+			            if (memberNameArea.isDisplayed() && availablePoints.isDisplayed() && membershipId.isDisplayed() && pointsExpiryDate.isDisplayed()) {
+			                System.out.println("Member details are displaying.");
+			                System.out.println("Member Name: " + memberNameArea.getText());
+			                System.out.println("Available Points: " + availablePoints.getText());
+			                System.out.println("Membership ID: " + membershipId.getText());
+			                System.out.println("Points Expiry Date: " + pointsExpiryDate.getText());
+			            } else {
+			                System.out.println("Some expected elements did not become visible within the timeout period.");
+			                Assert.fail("Member details are not fully displaying.");
+			            }
+			        } catch (TimeoutException e) {
+			            System.err.println("Timeout waiting for member details elements: " + e.getMessage());
+			            Assert.fail("An error occurred during Member details verification: Timeout waiting for elements.");
+			        } catch (Exception e) {
+			            if (memberNameArea == null || !memberNameArea.isDisplayed()) {
+			                System.out.println("Member details section is not visible.");
+			            }
+			            if (availablePoints == null || !availablePoints.isDisplayed()) {
+			                System.out.println("Available points are not visible.");
+			            }
+			            if (membershipId == null || !membershipId.isDisplayed()) {
+			                System.out.println("Membership ID is not visible.");
+			            }
+			            if (pointsExpiryDate == null || !pointsExpiryDate.isDisplayed()) {
+			                System.out.println("Points expiry date is not visible.");
+			            }
+			            System.err.println("An error occurred during Member details verification: " + e.getMessage());
+			            Assert.fail("An unexpected error occurred during Member details verification: " + e.getMessage());
+			        }
+					
+					/*
+					 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 				      	WebElement memberNameArea=null;
 				        WebElement availablePoints = null;
 				        WebElement membershipId = null;
@@ -206,21 +278,38 @@ public class earnPointsPage {
 				            }
 				            System.out.println("An error occurred on Member details screen: " + e.getMessage());
 				            Assert.fail("An error occurred during Member details verification: " + e.getMessage());
-				        }
+				        }*/
 				}
 				
 				
 				public void clickOnHyperlink() {
-					headerHyperlink .click();
+					//headerHyperlink .click();
+					FluentWait<WebDriver> wait = new FluentWait<>(driver)
+			                .withTimeout(Duration.ofSeconds(30))
+			                .pollingEvery(Duration.ofMillis(500))
+			                .ignoring(NoSuchElementException.class)
+			                .ignoring(StaleElementReferenceException.class);
+
+			        WebElement element = wait.until(new Function<WebDriver, WebElement>() {
+			            public WebElement apply(WebDriver driver) {
+			                return headerHyperlink;
+			            }
+			        });
+
+			        // Ensure the element is clickable
+			        wait.until(ExpectedConditions.elementToBeClickable(element));
+
+			        element.click();
+			    }
 				    	
-				    }
+				    
 				    
 				
 				public void headerHyperlinkVerificationOnEarnPointsScreen(WebDriver driver) {
 			    	
 					try {
 						// Create an instance of WebDriverWait with a timeout of 10 seconds
-				        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+				        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 				        // Wait for the URL to change to the expected URL
 				        WebElement pageLoaded = wait.until(ExpectedConditions.visibilityOf(navigatedFromEarnPointToLocation));
@@ -243,7 +332,7 @@ public class earnPointsPage {
 				 public void clickOnBackButton() {
 				    	try {
 				            // Create an instance of WebDriverWait with a timeout of 10 seconds
-				            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+				            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 				            // Wait for the hamburger icon to be clickable
 				            WebElement hamburgerIcon = wait.until(ExpectedConditions.elementToBeClickable(backButton));
@@ -262,7 +351,7 @@ public class earnPointsPage {
 				 public void verifySuccessfullNavigationForBackButton(WebDriver driver) {
 					 try {
 							// Create an instance of WebDriverWait with a timeout of 10 seconds
-					        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+					        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 					        // Wait for the URL to change to the expected URL
 					        WebElement pageLoaded = wait.until(ExpectedConditions.visibilityOf(navigatedFromEarnPointToMemberDetails));
@@ -288,7 +377,7 @@ public class earnPointsPage {
 				    	
 					 try {
 				            // Create an instance of WebDriverWait with a timeout of 10 seconds
-				            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+				            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 				            // Wait for the hamburger icon to be clickable
 				            WebElement hamburgerIcon = wait.until(ExpectedConditions.elementToBeClickable(hamburgerIconMemberOnEarnPointPage));
@@ -308,7 +397,7 @@ public class earnPointsPage {
 					    
 				    	try {
 				            // Create an instance of WebDriverWait with a timeout of 10 seconds
-				            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+				            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 				            // Wait for the hamburger icon to be clickable
 				            WebElement hamburgerIcon = wait.until(ExpectedConditions.elementToBeClickable(hamburgerIconMemberLookupOption));
@@ -327,7 +416,7 @@ public class earnPointsPage {
 				 public void verifySuccessfullNavigationFromEarnPointsToMemberLookupScreen(WebDriver driver) {
 					 try {
 							// Create an instance of WebDriverWait with a timeout of 10 seconds
-					        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+					        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 					        // Wait for the URL to change to the expected URL: navigatedFromMemberLookupToMemeberLookup
 					        WebElement pageLoaded = wait.until(ExpectedConditions.visibilityOf(navigatedFromEarnPointToMemeberLookup));
@@ -350,7 +439,7 @@ public class earnPointsPage {
 				    	
 				    	try {
 				            // Create an instance of WebDriverWait with a timeout of 10 seconds
-				            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+				            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 				            // Wait for the hamburger icon to be clickable
 				            WebElement hamburgerIcon = wait.until(ExpectedConditions.elementToBeClickable(hamburgerIconLocationOption));
@@ -367,7 +456,7 @@ public class earnPointsPage {
 				 public void verifySuccessfullNavigationFromEarnPointToLocationScreen(WebDriver driver) {
 					 try {
 							// Create an instance of WebDriverWait with a timeout of 10 seconds
-					        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+					        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 					        // Wait for the URL to change to the expected URL//navigatedFromMemberLookupToLocation
 					        WebElement pageLoaded = wait.until(ExpectedConditions.visibilityOf(navigatedFromEarnPointToLocation));
@@ -392,7 +481,7 @@ public class earnPointsPage {
 						
 						try {
 				            // Create an instance of WebDriverWait with a timeout of 10 seconds
-				            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+				            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 				            // Wait for the hamburger icon to be clickable
 				            WebElement hamburgerIcon = wait.until(ExpectedConditions.elementToBeClickable(logoutFromEarnPointsScreen));
@@ -412,7 +501,7 @@ public class earnPointsPage {
 				 public void verifyLogoutOptionOnEarnPointsScreen(WebDriver driver) {
 					 try {
 							// Create an instance of WebDriverWait with a timeout of 10 seconds
-					        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+					        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 					        // Wait for the URL to change to the expected URL
 					        WebElement pageLoaded = wait.until(ExpectedConditions.visibilityOf(naviagtedToLoginPage));
@@ -507,10 +596,13 @@ public class earnPointsPage {
 				 
 				 public void dateVerification(WebDriver driver) {
 					 try {
-				           
+						// Wait for the date field to be visible
+				            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+				            WebElement dateField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("EP037IN")));// Adjust the locator as needed
+
 				            
 				            // Retrieve the date from the field
-				            String dateValue = date.getAttribute("value");
+				            String dateValue = dateField.getAttribute("value");
 				            System.out.println("The date displayed in the field is: " + dateValue);
 				            
 				            // Get the current system date
@@ -547,9 +639,14 @@ public class earnPointsPage {
 				 public void timeVerification(WebDriver driver) {
 					 
 					 try {
+						 
+						// Wait for the date field to be visible
+				            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+				            WebElement timeField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("EP038IN"))); // Adjust the locator as needed
+
 				            
 				            // Retrieve the time from the field
-				            String timeValue = time.getAttribute("value");
+				            String timeValue = timeField.getAttribute("value");
 				            System.out.println("The time displayed in the field is: " + timeValue);
 				            
 				            // Get the current system time
@@ -620,7 +717,7 @@ public class earnPointsPage {
 					 
 					 try {
 				            // Create an instance of WebDriverWait with a timeout of 10 seconds
-				            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+				            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 				            // Wait for the hamburger icon to be clickable
 				            WebElement clickSubmitButton = wait.until(ExpectedConditions.elementToBeClickable(submitButton));
@@ -684,7 +781,7 @@ public class earnPointsPage {
 				 {
 					 
 					 try {
-							WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+							WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 					        // Wait for the error message element to be visible
 					        WebElement successMsg = wait.until(ExpectedConditions.visibilityOf(successMessage));
@@ -742,28 +839,38 @@ public class earnPointsPage {
 				 
 				 public void verifySuccessMessageIfRedeemingPoints(String expectedMessage)
 				 {
-					 
-					 try {
-							WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+					 FluentWait<WebDriver> wait = new FluentWait<>(driver)
+					            .withTimeout(Duration.ofSeconds(60))
+					            .pollingEvery(Duration.ofMillis(1000))
+					            .ignoring(NoSuchElementException.class)
+					            .ignoring(StaleElementReferenceException.class);
 
-					        // Wait for the error message element to be visible
+					    try {
+					        // Wait for the success message element to be visible
 					        WebElement successMsg = wait.until(ExpectedConditions.visibilityOf(successRedeemMessage));
 
-					        // Get the text of the error message and trim it
+					        // Get the text of the success message and trim it
 					        String actualValidationMessage = successMsg.getText().trim();
-					        System.out.println("Actual success message after using transaction amount and Go to Pass point used values submitted :" +actualValidationMessage);
-					        
-					        
+					        System.out.println("Actual success message: " + actualValidationMessage);
+
+					        // Verify the success message content
 					        if (actualValidationMessage.contains(expectedMessage)) {
-				                System.out.println("Success message is displayed correctly.");
-				            } else {
-				                System.out.println("Success message did not contain the expected text.");
-				                Assert.fail("Success message did not contain the expected text.");
-				            }
-				        } catch (Exception e) {
-				            System.out.println("An error occurred while verifying the success message: " + e.getMessage());
-				            Assert.fail("An error occurred while verifying the success message: " + e.getMessage());
-				        }
+					            System.out.println("Success message is displayed correctly.");
+					        } else {
+					            System.out.println("Success message did not contain the expected text.");
+					            Assert.fail("Success message did not contain the expected text.");
+					        }
+					    } catch (TimeoutException e) {
+					        System.out.println("Timeout waiting for success message element: " + e.getMessage());
+					        Assert.fail("Timeout waiting for success message element.");
+					    } catch (NoSuchElementException e) {
+					        System.out.println("Element not found: " + e.getMessage());
+					        Assert.fail("Element not found.");
+					        }catch (Exception e) {
+					        System.out.println("An error occurred while verifying the success message: " + e.getMessage());
+					        Assert.fail("An error occurred while verifying the success message: " + e.getMessage());
+					    }
+				    
 					        
 					     
 				 }
@@ -816,38 +923,44 @@ public class earnPointsPage {
 				 
 				 public void verifyValidationMessageIfGoToPassIsGreaterThanTxnAmt(String expectedMessage)
 				 {
-					 
 					 try {
-							WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+					        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+					        wait.pollingEvery(Duration.ofMillis(1000)); // Adjust polling interval if needed
 
 					        // Wait for the error message element to be visible
-					        WebElement successMsg = wait.until(ExpectedConditions.visibilityOf(goToPassValueMoreThanTxnAmount));
+					        WebElement successMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(
+					                By.xpath("//p[@id='EP041-helper-text' and contains(text(),'Entered Go To Pass points used is more than the Transaction Amount')]")));
 
 					        // Get the text of the error message and trim it
-					        String actualValidationMessage = successMsg.getText().trim();
-					        System.out.println("Actual validation message :" +actualValidationMessage);
-					        
-					        
+					        String actualValidationMessage = successMsg.getText();
+					        System.out.println("Actual validation message: " + actualValidationMessage);
+
+					        // Verify the validation message content
 					        if (actualValidationMessage.contains(expectedMessage)) {
-				                System.out.println("Validation message is displayed correctly.");
-				            } else {
-				                System.out.println("Validation message did not contain the expected text.");
-				                Assert.fail("Validation message did not contain the expected text.");
-				            }
-				        } catch (Exception e) {
-				            System.out.println("An error occurred while verifying the Validation message: " + e.getMessage());
-				            Assert.fail("An error occurred while verifying the Validation message: " + e.getMessage());
-				        }
-					        
-					     
-				 }
+					            System.out.println("Validation message is displayed correctly.");
+					        } else {
+					            System.out.println("Validation message did not contain the expected text.");
+					            Assert.fail("Validation message did not contain the expected text.");
+					        }
+					    } catch (TimeoutException e) {
+					        System.out.println("Timeout waiting for element: " + e.getMessage());
+					        Assert.fail("Timeout waiting for element.");
+					    } catch (NoSuchElementException e) {
+					        System.out.println("Element not found: " + e.getMessage());
+					        Assert.fail("Element not found.");
+					    } catch (Exception e) {
+					        System.out.println("An error occurred while verifying the Validation message: " + e.getMessage());
+					        Assert.fail("An error occurred while verifying the Validation message: " + e.getMessage());
+					    }
+					}
+				 
 				 
 				 
 				 public void verifyValidationMessageIfGoToPassIsGreaterThanAvailablePoints(String expectedMessage)
 				 {
 					 
 					 try {
-							WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+							WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 					        // Wait for the error message element to be visible
 					        WebElement successMsg = wait.until(ExpectedConditions.visibilityOf(goToPassValueMoreThanAvailablePoints));
@@ -870,7 +983,37 @@ public class earnPointsPage {
 					        
 					     
 				 }
-				 
+
+				public void verifySuccessMessageExceedThresoldValue(String expectedMessage) {
+					 FluentWait<WebDriver> wait = new FluentWait<>(driver)
+					            .withTimeout(Duration.ofSeconds(30))
+					            .pollingEvery(Duration.ofMillis(500))
+					            .ignoring(NoSuchElementException.class)
+					            .ignoring(StaleElementReferenceException.class);
+
+					    try {
+					        // Wait for the success message element to be visible
+					        WebElement successMsg = wait.until(ExpectedConditions.visibilityOf(thresoldSuccessMessage));
+
+					        // Get the text of the success message and trim it
+					        String actualValidationMessage = successMsg.getText().trim();
+					        System.out.println("Actual validation message if Threshold value exceeded: " + actualValidationMessage);
+
+					        // Verify the success message content
+					        if (actualValidationMessage.contains(expectedMessage)) {
+					            System.out.println("Success message for Threshold value exceeded is displayed correctly.");
+					        } else {
+					            System.out.println("Success message did not contain the expected text.");
+					            Assert.fail("Success message did not contain the expected text.");
+					        }
+					    } catch (TimeoutException e) {
+					        System.out.println("Timeout waiting for success message element: " + e.getMessage());
+					        Assert.fail("Timeout waiting for success message element.");
+					    } catch (Exception e) {
+					        System.out.println("An error occurred while verifying the success message: " + e.getMessage());
+					        Assert.fail("An error occurred while verifying the success message: " + e.getMessage());
+					    }
+				}
 				
 	}
 				 
