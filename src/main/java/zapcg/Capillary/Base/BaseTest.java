@@ -34,6 +34,9 @@ public class BaseTest {
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--remote-allow-origins=*");
                 options.addArguments("--headless"); // Enable headless mode
+                options.addArguments("--no-sandbox");
+                options.setExperimentalOption("detach", true);
+                options.setAcceptInsecureCerts(true);
 
                 // Adding detach option
                 options.setExperimentalOption("detach", true);
