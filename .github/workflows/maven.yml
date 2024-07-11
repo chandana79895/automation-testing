@@ -26,3 +26,4 @@ jobs:
       run: |
         ls -la
         pwd
+        mvn clean install
