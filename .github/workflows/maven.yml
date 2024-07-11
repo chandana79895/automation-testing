@@ -59,6 +59,5 @@ jobs:
 
     - name: Build with Maven
       run: |
-        cd /usr/bin
-        chromedriver
+        cd /usr/bin/chromedriver
         mvn clean install
