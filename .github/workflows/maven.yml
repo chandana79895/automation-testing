@@ -48,21 +48,6 @@ jobs:
         sudo chown runner:runner /usr/bin/chromedriver
         sudo chmod +x /usr/bin/chromedriver
 
-    # - name: Debug info
-    #   run: |
-    #     echo "Java version:"
-    #     java -version
-    #     echo "Chrome version:"
-    #     google-chrome --version
-    #     echo "ChromeDriver version:"
-    #     chromedriver --version
-    #     echo "Current directory:"
-    #     pwd
-    #     echo "Contents of /usr/bin:"
-    #     ls -la /usr/bin
-    #     echo "Contents of /usr/local/bin:"
-    #     ls -la /usr/local/bin
-
     - name: Install xvfb
       run: sudo apt-get install -y xvfb
 
@@ -72,9 +57,9 @@ jobs:
         xvfb-run -a mvn clean install 
 
     - name: Upload test report artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: TestReport
-          path: /home/runner/work/github-actions/github-actions/automation-testing/Reports/index.html
-          if-no-files-found: warn    
+      uses: actions/upload-artifact@v3
+      with:
+        name: TestReport
+        path: /home/runner/work/github-actions/github-actions/automation-testing/Reports/index.html
+        if-no-files-found: warn    
 
