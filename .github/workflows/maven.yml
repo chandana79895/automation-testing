@@ -61,9 +61,7 @@ jobs:
 
     - name: Clean previous reports
       run: |
-        rm -rf /home/runner/work/automation-testing/automation-testing/Reports/       
-        cd Reports/
-        ls -al
+        rm -rf /home/runner/work/automation-testing/automation-testing/Reports/ 
   
 
     - name: Start xvfb
