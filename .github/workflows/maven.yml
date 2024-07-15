@@ -72,6 +72,9 @@ jobs:
       run: |
         export DISPLAY=:99
         xvfb-run -a mvn clean test
+        pwd
+        cd Reports/
+        ls -la
 
     - name: Upload test report artifact
       uses: actions/upload-artifact@v3
