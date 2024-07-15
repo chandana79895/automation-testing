@@ -12,7 +12,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
 
@@ -60,7 +60,7 @@ jobs:
       run: mvn install -DskipTests
 
     - name: Clean previous reports
-      run: rm -rf path/to/your/report/directory
+      run: rm -rf /home/runner/work/automation-testing/automation-testing/Reports/*
   
 
     - name: Start xvfb
