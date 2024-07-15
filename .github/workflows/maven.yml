@@ -62,19 +62,19 @@ jobs:
     - name: Clean previous reports
       run: |
         ls -la
-        rm -rf /home/runner/work/automation-testing/automation-testing/Reports/
+        rm -rf /home/runner/work/automation-testing/automation-testing/Reports/index.html
         ls -la
   
 
     - name: Start xvfb
       run: |
         export DISPLAY=:99
-        xvfb-run -a mvn clean test 
+        xvfb-run -a mvn clean test
 
     - name: Upload test report artifact
       uses: actions/upload-artifact@v3
       with:
         name: TestReport
         path: /home/runner/work/automation-testing/automation-testing/Reports/index.html
-        if-no-files-found: warn    
+        if-no-files-found: warn
 
