@@ -62,7 +62,9 @@ jobs:
     - name: Clean previous reports
       run: |
         ls -la
-        rm -rf /home/runner/work/automation-testing/automation-testing/Reports/index.html
+        mkdir /home/runner/work/automation-testing/automation-testing/Reports/
+        rm -rf /home/runner/work/automation-testing/automation-testing/Reports/*
+        cd /home/runner/work/automation-testing/automation-testing/Reports/
         ls -la
   
 
