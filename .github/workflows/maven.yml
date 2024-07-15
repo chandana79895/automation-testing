@@ -4,11 +4,11 @@ on:
   push:
     branches:
        feature/cron-check
-  schedule:
-    - cron: '*/5 * * * *'
-      branches:
-        - develop
-        - main
+  # schedule:
+  #   - cron: '*/5 * * * *'
+  # branches:
+  #    - develop
+  #    - main
 
 jobs:
   deploy:
