@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - main
-  schedule:
-    - cron: '*/5 * * * *'
+  # schedule:
+  #   - cron: '*/5 * * * *'
 
 
 jobs:
@@ -48,7 +48,9 @@ jobs:
         LATEST_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)
         wget -q "https://chromedriver.storage.googleapis.com/${LATEST_VERSION}/chromedriver_linux64.zip"
         unzip chromedriver_linux64.zip
-        sudo mv chromedriver /usr/local/bin/chromed
+        sudo mv chromedriver /usr/bin/chromedriver
+        sudo chown runner:runner /usr/bin/chromedriver
+        sudo chmod +x /usr/bin/chromedriver
 
     - name: Install xvfb
       run: sudo apt-get install -y xvfb
@@ -62,6 +64,6 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: TestReport
-        path: /home/runner/work/github-actions/github-actions/automation-testing/Reports/index.html
+        path: /home/runner/work/automation-testing/automation-testing/reports/index.html
         if-no-files-found: warn    
 
