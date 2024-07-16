@@ -37,7 +37,7 @@ public class BaseTest {
         this.deviceName = deviceName;
     }
     
-	
+	/*
     public void initialization(String browser) {
     
     	//WebDriver driver = null;
@@ -46,7 +46,7 @@ public class BaseTest {
                 System.out.println("Opening Chrome browser...");
 
                 // Hardcoding Chrome driver path
-                System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver"); 
+                System.setProperty("webdriver.chrome.driver", "C:\\BrowserDriver\\ChromeDriver\\chromedriver-win64\\chromedriver.exe");
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--remote-allow-origins=*");
                 //options.addArguments("--headless"); // Enable headless mode
@@ -85,35 +85,40 @@ public class BaseTest {
         }
     }
 
-//     public void initialization(String browser) {
-//     	try {
-//         if (browser.equalsIgnoreCase("chrome")) {
-//         	WebDriverManager.chromedriver().setup();
-//         	 ChromeOptions options = new ChromeOptions();
-//              options.addArguments("--remote-allow-origins=*");
-//           // Adding detach option
-//              options.setExperimentalOption("detach", true);
-//           driver = new ChromeDriver(options);
+    */
+    
+    
+    
+
+    public void initialization(String browser) {
+    	try {
+        if (browser.equalsIgnoreCase("chrome")) {
+        	WebDriverManager.chromedriver().setup();
+        	 ChromeOptions options = new ChromeOptions();
+             options.addArguments("--remote-allow-origins=*");
+          // Adding detach option
+             options.setExperimentalOption("detach", true);
+          driver = new ChromeDriver(options);
         
             
-//         } else if (browser.equalsIgnoreCase("firefox")) {
-//             WebDriverManager.firefoxdriver().setup();
-//             driver = new FirefoxDriver();
-//         }
+        } else if (browser.equalsIgnoreCase("firefox")) {
+            WebDriverManager.firefoxdriver().setup();
+            driver = new FirefoxDriver();
+        }
 
-//         if (dimension != null) {
-//             driver.manage().window().setSize(dimension);    
-//             }
-//     	driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
-//         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-//     } catch (Exception e) {
-//         System.err.println("Error initializing WebDriver: " + e.getMessage());
-//         if (driver != null) {
-//             driver.quit();
-//         }
-//     }
+        if (dimension != null) {
+            driver.manage().window().setSize(dimension);    
+            }
+    	driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+    } catch (Exception e) {
+        System.err.println("Error initializing WebDriver: " + e.getMessage());
+        if (driver != null) {
+            driver.quit();
+        }
+    }
     
-// }
+}
     
     
     @AfterMethod

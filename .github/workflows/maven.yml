@@ -40,26 +40,28 @@ jobs:
         sudo mv chromedriver-linux64/chromedriver /usr/bin/chromedriver
         sudo chown runner:runner /usr/bin/chromedriver
         sudo chmod +x /usr/bin/chromedriver
-    - name: Debug info
+    # - name: Debug info
+    #   run: |
+    #     echo "Java version:"
+    #     java -version
+    #     echo "Chrome version:"
+    #     google-chrome --version
+    #     echo "ChromeDriver version:"
+    #     chromedriver --version
+    #     echo "Current directory:"
+    #     pwd
+    #     echo "Contents of /usr/bin:"
+    #     ls -la /usr/bin
+    #     echo "Contents of /usr/local/bin:"
+    #     ls -la /usr/local/bin
+
+    - name: Install xvfb
+      run: sudo apt-get install -y xvfb
+
+    - name: Start xvfb
       run: |
-        echo "Java version:"
-        java -version
-        echo "Chrome version:"
-        google-chrome --version
-        echo "ChromeDriver version:"
-        chromedriver --version
-        echo "Current directory:"
-        pwd
-        echo "Contents of /usr/bin:"
-        ls -la /usr/bin
-        echo "Contents of /usr/local/bin:"
-        ls -la /usr/local/bin
-         
-    - name: Build with Maven
-      run: |
-        ls -la
-        pwd
-        mvn clean install
+        export DISPLAY=:99
+        xvfb-run -a mvn clean install 
 
     - name: Upload test report artifact
       uses: actions/upload-artifact@v3
