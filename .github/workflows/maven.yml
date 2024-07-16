@@ -3,30 +3,21 @@ name: Java CI with Maven
 on:
   push:
     branches:
-      - main
-  schedule:
-    - cron: '*/5 * * * *'
-
+      - "main"
 
 jobs:
   deploy:
     runs-on: self-hosted
 
     steps:
-
     - uses: actions/checkout@v2
 
     - name: Set up JDK 11
-
       uses: actions/setup-java@v2
-
       with:
-
         java-version: '11'
-
-        distribution: 'temurin'
-
-        cache: maven
+        distribution: 'adopt'
+        cache: 'maven'
 
     - name: Update apt-get
       run: sudo apt-get update
@@ -37,28 +28,38 @@ jobs:
     - name: Set up Maven and dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y maven libasound2 libasound2-data libnspr4 libnss3 default-jre-headless libjansi-java libmaven3-core-java libwagon-file-java libwagon-http-shaded-java gnupg unzip
-
-    - name: Install Google Chrome and ChromeDriver
+        sudo apt-get install -y maven libasound2 libasound2-data libnspr4 libnss3 default-jre-headless libjansi-java libmaven3-core-java libwagon-file-java libwagon-http-shaded-java
+    - name: Googledriver setup
       run: |
         sudo apt install wget -y
         sudo apt install unzip -y
-        wget https://dl.google.com/linux/deb/pool/main/g/google-chrome-stable/google-chrome-stable_current_amd64.deb
-        sudo dpkg -i google-chrome-stable_current_amd64.deb
-        wget https://storage.googleapis.com/chrome-for-testing-public/${LATEST_VERSION}/linux64/chromedriver-linux64.zip
+        wget https://dl.google.com/linux/deb/pool/main/g/google-chrome-stable/google-chrome-stable_126.0.6478.126-1_amd64.deb
+        sudo dpkg -i google-chrome-stable_126.0.6478.126-1_amd64.deb
+        wget https://storage.googleapis.com/chrome-for-testing-public/126.0.6478.126/linux64/chromedriver-linux64.zip
         unzip chromedriver-linux64.zip  
-        sudo mv chromedriver /usr/bin/chromedriver
+        sudo mv chromedriver-linux64/chromedriver /usr/bin/chromedriver
         sudo chown runner:runner /usr/bin/chromedriver
-        sudo chmod +x /usr/bin/chromedriver  
-        chromedriver
-
-    - name: Install xvfb
-      run: sudo apt-get install -y xvfb
-
-    - name: Start xvfb
+        sudo chmod +x /usr/bin/chromedriver
+    - name: Debug info
       run: |
-        export DISPLAY=:99
-        xvfb-run -a mvn clean install 
+        echo "Java version:"
+        java -version
+        echo "Chrome version:"
+        google-chrome --version
+        echo "ChromeDriver version:"
+        chromedriver --version
+        echo "Current directory:"
+        pwd
+        echo "Contents of /usr/bin:"
+        ls -la /usr/bin
+        echo "Contents of /usr/local/bin:"
+        ls -la /usr/local/bin
+         
+    - name: Build with Maven
+      run: |
+        ls -la
+        pwd
+        mvn clean install
 
     - name: Upload test report artifact
       uses: actions/upload-artifact@v3
