@@ -67,6 +67,6 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: TestReport
-        path: /home/runner/work/github-actions/github-actions/automation-testing/Reports/index.html
+        path: /home/runner/work/automation-testing/automation-testing/Reports/index.html
         if-no-files-found: warn    
 
