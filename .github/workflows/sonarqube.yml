@@ -1,0 +1,59 @@
+name: SonarQube Analysis
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+
+jobs:
+  sonarQube:
+    runs-on: ubuntu-latest
+
+    services:
+      sonar:
+        image: sonarqube:community
+        options: --health-cmd='curl --fail http://localhost:9000/api/system/health || exit 1' 
+        ports:
+          - 9000:9000
+        env:
+          SONAR_ES_BOOTSTRAP_CHECKS_DISABLE: "true"
+        volumes:
+          - sonarqube_data:/opt/sonarqube/data
+          - sonarqube_logs:/opt/sonarqube/logs
+          - sonarqube_extensions:/opt/sonarqube/extensions
+          - sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Wait for SonarQube to be ready
+      run: |
+        echo "Waiting for SonarQube to start..."
+        while [ "$(curl -s http://localhost:9000/api/system/status | jq -r .status)" != "UP" ]; do
+          sleep 5
+        done
+
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+
+    - name: Cache SonarQube dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.sonar/cache
+        key: ${{ runner.os }}-sonar
+
+    - name: Run SonarQube Scanner
+      env:
+        SONAR_HOST_URL: http://localhost:9000
+        SONAR_LOGIN: ${{ secrets.SONAR_TOKEN }}
+      run: ./gradlew sonarqube # Use `mvn sonar:sonar` for Maven projects
+
+volumes:
+  sonarqube_data:
+  sonarqube_logs:
+  sonarqube_extensions:
+  sonarqube_bundled-plugins:
