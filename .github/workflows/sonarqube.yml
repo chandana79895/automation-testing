@@ -51,9 +51,3 @@ jobs:
         SONAR_HOST_URL: http://localhost:9000
         SONAR_LOGIN: ${{ secrets.SONAR_TOKEN }}
       run: ./gradlew sonarqube # Use `mvn sonar:sonar` for Maven projects
-
-volumes:
-  sonarqube_data:
-  sonarqube_logs:
-  sonarqube_extensions:
-  sonarqube_bundled-plugins:
