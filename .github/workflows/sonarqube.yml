@@ -13,9 +13,10 @@ jobs:
     services:
       sonar:
         image: sonarqube:community
-        options: --health-cmd='curl --fail http://localhost:9000/api/system/health || exit 1' 
-        ports:
-          - 9000:9000
+        options: > 
+          --network github_network_${{ github.run_id }}
+          --network-alias sonar
+          -p 9000:9000 
         env:
           SONAR_ES_BOOTSTRAP_CHECKS_DISABLE: "true"
         volumes:
@@ -31,8 +32,8 @@ jobs:
     - name: Wait for SonarQube to be ready
       run: |
         echo "Waiting for SonarQube to start..."
-        while [ "$(curl -s http://localhost:9000/api/system/status | jq -r .status)" != "UP" ]; do
-          sleep 5
+        until curl -s http://localhost:9000/api/system/status | grep -q "UP"; do
+          sleep 10
         done
 
     - name: Set up JDK 11
@@ -50,4 +51,4 @@ jobs:
       env:
         SONAR_HOST_URL: http://localhost:9000
         SONAR_LOGIN: ${{ secrets.SONAR_TOKEN }}
-      run: ./gradlew sonarqube # Use `mvn sonar:sonar` for Maven projects
+      run: ./gradlew sonarqube
