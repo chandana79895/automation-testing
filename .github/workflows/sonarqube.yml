@@ -14,11 +14,10 @@ jobs:
       sonar:
         image: sonarqube:community
         options: > 
-          --network github_network_${{ github.run_id }}
           --network-alias sonar
           -p 9000:9000 
         env:
-          SONAR_ES_BOOTSTRAP_CHECKS_DISABLE: "true"
+          SONAR_ES_BOOTSTRAP_CHECKS_DISABLE: true
         volumes:
           - sonarqube_data:/opt/sonarqube/data
           - sonarqube_logs:/opt/sonarqube/logs
